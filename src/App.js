@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState, useEffect}from "react";
+import { Routes, Route } from "react-router-dom";
+import Routers from './utils/Routes';
+import  Footer  from "./components/Footer/footer";
+import Navbar from "./components/Navbar/navbar";
+// import jwtDecode from 'jwt-decode';
 
-function App() {
+const App = () => {
+  const [user,setUser] = useState({});
+  const [userRole, setUserRole] = useState('')
+
+  useEffect(() => {
+    try{
+      const jwt = localStorage.getItem('token');
+      const role = localStorage.getItem('role');
+      // const userData = jwtDecode(jwt);
+      //  setUser(userData)
+       setUserRole(role)
+    }
+    catch(ex){
+
+    }
+  })
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar role={userRole} />
+        <Routes>
+          {Routers.map((item)=>{
+             return <Route key={item.id} path={item.path} element={<item.element />} />
+          })}
+        </Routes>
+      <Footer />
     </div>
   );
-}
+};
 
 export default App;
