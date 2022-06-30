@@ -16,47 +16,47 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import IconHandler from "../../utils/IconHandler";
-import { signIn } from "../../api/request";
+import { signInRequest } from "../../api/request";
 import { Toast } from "../../utils/toastify";
 
-
-const SignIn = (props) => {
-  const [user, SetUser] = useState({
+const SignIn = () => {
+  const [user, setUser] = useState({
     email: "",
     password: "",
   });
-
-  const formSubmit = async (e) => {
+  const inputHandler = (e) => {
     e.preventDefault();
-    await SetUser({
-      email: e.target.email.value,
-      password: e.target.password.value,
-    });
-
-    signIn(user)
-      .then((res) => {
-         if (res.data.success) {
-           localStorage.setItem("token", res.data.token);
-           localStorage.setItem("userId", res.data.payload._id);
-           Toast.fire({
-             icon: 'success',
-             title: 'Success'
-           })
-         } else{
-          Toast.fire({
-            icon: 'error',
-            title: `${res.data.msg}`
-          }) 
-         }
-      })
-      .catch((err) => {
+    const { name, value } = e.target;
+    setUser({ ...user, [name]: value });
+  };
+  const formHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await signInRequest(user);
+      console.log(response);
+      if (response.data.token) {
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
         Toast.fire({
-          icon: 'error',
-          title: `${err.response.data.msg}`
-        }) 
+          icon: "success",
+          title: "Success",
+        });
+      } else {
+        Toast.fire({
+          icon: "error",
+          title: `${response?.data.msg}`,
+        });
+      }
+    } catch (e) {
+      console.log(e);
+      Toast.fire({
+        icon: "error",
+        title: `${e.response?.data?.msg}`,
       });
+    }
   };
 
+  const { email, password } = user;
   return (
     <div className="section">
       <FormWrapper>
@@ -65,18 +65,27 @@ const SignIn = (props) => {
             <Img src="./brand-logo.svg" alt="logo-turbosale" />
           </Link>
           <Text>Sign in</Text>
-          <Form onSubmit={formSubmit}>
+          <Form onSubmit={formHandler}>
             <Label>
-              <Input type="email" name="email" placeholder="Email" required />
+              <Input
+                onChange={inputHandler}
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={email}
+                required
+              />
               <Icon>
                 <FontAwesomeIcon icon={faEnvelope} />
               </Icon>
             </Label>
             <Label>
               <Input
+                onChange={inputHandler}
                 type="password"
                 name="password"
                 placeholder="Password"
+                value={password}
                 required
               />
               <Icon onClick={(e) => IconHandler(e)}>
