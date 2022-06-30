@@ -16,7 +16,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import IconHandler from "../../utils/IconHandler";
-import { Signin } from "../../api/request";
+import { signIn } from "../../api/request";
+import { Toast } from "../../utils/toastify";
+
 
 const SignIn = (props) => {
   const [user, SetUser] = useState({
@@ -26,20 +28,33 @@ const SignIn = (props) => {
 
   const formSubmit = async (e) => {
     e.preventDefault();
-   await SetUser({
+    await SetUser({
       email: e.target.email.value,
       password: e.target.password.value,
     });
 
-    Signin(user)
-      .then((res) => res.data)
-      .then((data) => {
-        console.log(data);
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("userId", data.payload._id);
-       
+    signIn(user)
+      .then((res) => {
+         if (res.data.success) {
+           localStorage.setItem("token", res.data.token);
+           localStorage.setItem("userId", res.data.payload._id);
+           Toast.fire({
+             icon: 'success',
+             title: 'Success'
+           })
+         } else{
+          Toast.fire({
+            icon: 'error',
+            title: `${res.data.msg}`
+          }) 
+         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        Toast.fire({
+          icon: 'error',
+          title: `${err.response.data.msg}`
+        }) 
+      });
   };
 
   return (

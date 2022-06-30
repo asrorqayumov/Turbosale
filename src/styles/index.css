@@ -29,6 +29,14 @@ body {
   text-decoration: none;
 }
 
+.nav-profile-link{
+  text-decoration: none;
+  color: #fff;
+  padding-right: 5px;
+  font-size: 12px;
+  
+}
+
 .nav-link:hover {
   background-color: var(--orange);
 }

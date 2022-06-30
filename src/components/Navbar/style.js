@@ -23,16 +23,35 @@ export const Img = styled.img`
   }
 `;
 
+export const ImgCircle = styled.img`
+   width: 35px;
+   height: 35px;
+   border-radius: 50%;
+`
+
 export const Navlist = styled.ul`
   list-style: none;
   display: flex;
 `;
 export const NavItem = styled.li`
-  padding: 0 15px;
+  padding: 0 30px;
 `;
+export const NavItemProfile = styled.li`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+`
 
 export const Navright = styled.div`
   position: relative;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &>li{
+    padding: 0 10px;
+  }
 `;
 export const Badge = styled.span`
   position: absolute;
@@ -55,3 +74,6 @@ export const Button = styled.button`
   font-size: 20px;
   cursor: pointer;
 `;
+export const Role = styled.span`
+  padding-left: 125px;
+`

@@ -1,34 +1,49 @@
 import React from "react";
-import Routes from "../../utils/Routes";
 import { NavLink } from "react-router-dom";
+import Routers from "../../utils/Routes";
 import { Nav, Img, Navlist, NavItem, Navright, Button, Badge } from "./style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
-const Navbar = () => {
+const NavbarPublic = () => {
   return (
     <Nav>
       <NavLink to="/">
         <Img src="./brand.png"></Img>
       </NavLink>
       <Navlist>
-        {Routes.map((e) => {
-          return (
-            <NavItem key={e.id}>
-              <NavLink className="nav-link" to={e.path}>
-                {e.title}
-              </NavLink>
-            </NavItem>
-          );
+        {Routers.map((item) => {
+          if (item.title !== "Sign-in" && item.title !== "Sign-up") {
+            return (
+              <NavItem key={item.id}>
+                <NavLink className="nav-link" to={item.path}>
+                  {item.title}
+                </NavLink>
+              </NavItem>
+            );
+          }
         })}
       </Navlist>
       <Navright>
-        <Badge>0</Badge>
-        <Button>
-          <FontAwesomeIcon icon={faCartShopping} />
-        </Button>
+      {Routers.map((item) => {
+          if (item.title == "Sign-in" || item.title == "Sign-up") {
+            return (
+              <NavItem key={item.id}>
+                <NavLink className="nav-link" to={item.path}>
+                  {item.title}
+                </NavLink>
+              </NavItem>
+            );
+          }
+        })}
+        <div>
+          <Badge>0</Badge>
+          <Button>
+            <FontAwesomeIcon icon={faCartShopping} />
+          </Button>
+        </div>
       </Navright>
     </Nav>
   );
 };
 
-export default Navbar;
+export default NavbarPublic;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   FormWrapper,
   Auth,
@@ -18,38 +18,39 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import IconHandler from "../../utils/IconHandler";
-import { Signup } from "../../api/request";
-
+import { signUpRequest } from "../../api/request";
+import { Toast } from "../../utils/toastify";
 
 const SignUp = () => {
-  const [user, SetUser] = useState({
-    fullname: "",
+  const [user, setUser] = useState({
+    fullName: "",
     email: "",
     password: "",
     phone: "",
   });
-
-  const formSubmit = async (e) => {
+  const inputHandler = (e) => {
     e.preventDefault();
-    await SetUser({
-      fullname: e.target.fullname?.value.trim(),
-      email: e.target.email?.value,
-      password: e.target.password?.value,
-      phone: e.target.phone?.value,
-      role: e.target.role?.value,
-    });
-
-    Signup(user)
-      .then((res) => res.data)
-      .then((data) => {
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("userId", data.user._id);
-        localStorage.setItem("role", data.user.role);
-        
-      })
-      .catch((err) => console.log(err));
+    const { name, value } = e.target;
+    setUser({ ...user, [name]: value });
   };
-
+  const formHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await signUpRequest(user);
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+      Toast.fire({
+        icon: "success",
+        title: "Success",
+      });
+    } catch (error) {
+      Toast.fire({
+        icon: "error",
+        title: `${error.response?.data.msg}`,
+      });
+    }
+  };
+  const { email, fullName, password, phone } = user;
   return (
     <div className="section">
       <FormWrapper>
@@ -58,12 +59,14 @@ const SignUp = () => {
             <Img src="./brand-logo.svg" alt="logo-turbosale" />
           </Link>
           <Text>Join Turbosale</Text>
-          <Form onSubmit={formSubmit}>
+          <Form onSubmit={formHandler}>
             <Label>
               <Input
+                onChange={inputHandler}
                 type="text"
-                name="fullname"
-                placeholder="Full name"
+                name="fullName"
+                value={fullName}
+                placeholder="FullName"
                 required
               />
               <Icon>
@@ -71,15 +74,24 @@ const SignUp = () => {
               </Icon>
             </Label>
             <Label>
-              <Input type="email" name="email" placeholder="Email" required />
+              <Input
+                onChange={inputHandler}
+                type="email"
+                name="email"
+                value={email}
+                placeholder="Email"
+                required
+              />
               <Icon>
                 <FontAwesomeIcon icon={faEnvelope} />
               </Icon>
             </Label>
             <Label>
               <Input
+                onChange={inputHandler}
                 type="password"
                 name="password"
+                value={password}
                 placeholder="Password"
                 required
               />
@@ -89,7 +101,14 @@ const SignUp = () => {
               </Icon>
             </Label>
             <Label>
-              <Input type="text" name="phone" placeholder="Phone" required />
+              <Input
+                onChange={inputHandler}
+                type="text"
+                name="phone"
+                value={phone}
+                placeholder="Phone"
+                required
+              />
               <Icon>
                 <FontAwesomeIcon icon={faPhone} />
               </Icon>
@@ -101,6 +120,7 @@ const SignUp = () => {
                   : e.currentTarget.classList.add("c-blue")
               }
               htmlFor="admin"
+              value="admin"
             >
               Admin
             </LabelCheckbox>
@@ -108,7 +128,7 @@ const SignUp = () => {
               type="checkbox"
               id="admin"
               value="admin"
-              name="admin"
+              name="role"
             />
             <Label>
               <Button className="btn btn-orange">Sign Up</Button>
