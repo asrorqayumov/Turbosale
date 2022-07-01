@@ -15,6 +15,13 @@ export function GetProducts(page = 1) {
     .catch((err) => err);
 }
 
+export function GetCarts() {
+  return axios
+    .get(`/cart`)
+    .then((res) => res.data)
+    .catch((err) => err);
+}
+
 export async function GetUserById(id) {
   try {
     const res = await axios.get(`/users/${id}`);

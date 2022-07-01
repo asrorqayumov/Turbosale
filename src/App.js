@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Routers from "./utils/Routes";
+  import {RoutersPublic,Routers} from "./utils/Routes";
 import Footer from "./components/Footer/footer";
 import NavbarPublic from "./components/Navbar/navbar";
 
 
 const App = () => {
   let token = localStorage.getItem("token");
-  if (true) {
+  if (token) {
     return (
       <div className="App">
         <NavbarPublic />
         <Routes>
-          {Routers.map((item) => {
+          {RoutersPublic.map((item) => {
             return (
               <Route
                 key={item.id}
@@ -26,7 +26,21 @@ const App = () => {
       </div>
     );
   }
-  return <h1>Salom</h1>;
+  return (
+    <div className="App">
+       <Routes>
+        {Routers.map((item) => {
+            return (
+              <Route
+                key={item.title}
+                path={item.path}
+                element={<item.element />}
+              />
+            );
+          })}
+        </Routes>
+    </div>
+  );
 };
 
 export default App;

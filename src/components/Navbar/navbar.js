@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import Routers from "../../utils/Routes";
+import {RoutersPublic} from "../../utils/Routes";
 import { Nav, Img, Navlist, NavItem, Navright, Button, Badge } from "./style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
@@ -17,7 +17,7 @@ const NavbarPublic = () => {
         <Img src="./brand.png"></Img>
       </NavLink>
       <Navlist>
-        {Routers.map((item) => {
+        {RoutersPublic.map((item) => {
           if (item.title !== "Sign-in" && item.title !== "Sign-up") {
             return (
               <NavItem key={item.id}>
@@ -30,7 +30,7 @@ const NavbarPublic = () => {
         })}
       </Navlist>
       <Navright>
-      {Routers.map((item) => {
+      {RoutersPublic.map((item) => {
           if (item.title == "Sign-in" || item.title == "Sign-up") {
             return (
               <NavItem key={item.id}>

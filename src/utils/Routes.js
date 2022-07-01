@@ -2,7 +2,7 @@ import Home from "../pages/Home/home";
 import Signup from "../pages/auth/SignUp";
 import Signin from "../pages/auth/SignIn";
 
-const Routes = [
+export const RoutersPublic = [
     { id:1, title:"Home", path:'/', element: Home},
     { id:2, title:"Products", path:'/products', element: 'some'},
     { id:3, title:"Contact", path:'/contact', element: 'some'},
@@ -11,4 +11,7 @@ const Routes = [
  
 ]
 
-export default Routes;
+
+export const Routers = [
+    { title:"Products", path:'/products', element: 'some'}, 
+]
