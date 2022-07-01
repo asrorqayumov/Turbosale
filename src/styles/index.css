@@ -2,7 +2,7 @@
   --orange: #f96435;
   --green: rgb(37, 173, 37);
   --main-dark: #251e70;
-  --blue:rgb(55, 125, 255);
+  --blue: rgb(55, 125, 255);
   --swiper-theme-color: var(--green);
 }
 
@@ -29,12 +29,11 @@ body {
   text-decoration: none;
 }
 
-.nav-profile-link{
+.nav-profile-link {
   text-decoration: none;
   color: #fff;
   padding-right: 5px;
   font-size: 12px;
-  
 }
 
 .nav-link:hover {
@@ -52,6 +51,7 @@ body {
   background-color: #eff7ea;
   border-radius: 3px;
   height: 400px;
+  z-index: 5;
 }
 
 .swiperSlide {
@@ -101,19 +101,35 @@ body {
   border: none;
   padding: 8px 20px;
   cursor: pointer;
+  text-decoration: none;
 }
-.btn-orange{
+.btn-orange {
   background-color: var(--orange);
   border-color: var(--orange);
 }
-.btn-primary{
+.btn-primary {
   background-color: var(--blue);
-  border-color:var(--blue) ;
+  border-color: var(--blue);
 }
-.auth-link{
+.btn-dark {
+  background-color: var(--main-dark);
+  border-color: var(--main-dark);
+  font-size: 17px;
+  margin-top: 13px;
+  display: inline-block;
+  max-width: 250px;
+  width: 100%;
+}
+.auth-link {
   font-size: 12px;
   text-decoration: none;
   color: var(--blue);
+}
+.modal-btn {
+  width: 100%;
+  font-size: 20px;
+  text-decoration: none;
+  text-align: center;
 }
 @media (max-width: 850px) {
   body {
@@ -136,9 +152,30 @@ body {
   }
 }
 
-.d-none{
+.d-none {
   display: none;
 }
-.c-blue{
+.c-blue {
   color: var(--blue) !important;
+}
+.ReactModal__Overlay {
+  z-index: 15;
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  display: flex;
+  justify-content: flex-end;
+}
+.react-card-modal {
+  position: relative;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  display: flex;
+  flex-direction: column;
+  width: 340px;
+  background-color: white;
+}
+.input-amount::-webkit-outer-spin-button,
+.input-amount::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

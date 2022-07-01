@@ -33,10 +33,9 @@ const SignIn = () => {
     e.preventDefault();
     try {
       const response = await signInRequest(user);
-      console.log(response);
       if (response.data.token) {
         localStorage.setItem("token", response.data.token);
-        localStorage.setItem("user", JSON.stringify(response.data.user));
+        localStorage.setItem("user", JSON.stringify(response.data.payload));
         Toast.fire({
           icon: "success",
           title: "Success",
@@ -48,7 +47,6 @@ const SignIn = () => {
         });
       }
     } catch (e) {
-      console.log(e);
       Toast.fire({
         icon: "error",
         title: `${e.response?.data?.msg}`,

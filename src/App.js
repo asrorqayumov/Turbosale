@@ -7,7 +7,7 @@ import NavbarPublic from "./components/Navbar/navbar";
 
 const App = () => {
   let token = localStorage.getItem("token");
-  if (token) {
+  if (true) {
     return (
       <div className="App">
         <NavbarPublic />

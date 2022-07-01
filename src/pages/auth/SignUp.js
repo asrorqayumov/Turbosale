@@ -13,7 +13,7 @@ import {
   InputChekbox,
   LabelCheckbox,
 } from "./style";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -22,6 +22,7 @@ import { signUpRequest } from "../../api/request";
 import { Toast } from "../../utils/toastify";
 
 const SignUp = () => {
+  let navigate = useNavigate();
   const [user, setUser] = useState({
     fullName: "",
     email: "",
@@ -43,6 +44,7 @@ const SignUp = () => {
         icon: "success",
         title: "Success",
       });
+      navigate("/sign-in");
     } catch (error) {
       Toast.fire({
         icon: "error",
@@ -87,6 +89,7 @@ const SignUp = () => {
               </Icon>
             </Label>
             <Label>
+              
               <Input
                 onChange={inputHandler}
                 type="password"

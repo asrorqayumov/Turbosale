@@ -4,9 +4,15 @@ import Routers from "../../utils/Routes";
 import { Nav, Img, Navlist, NavItem, Navright, Button, Badge } from "./style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import ModalCard from "../ModalCard/ModalCard";
 const NavbarPublic = () => {
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const openModal = ()=>{
+      setIsOpen(true);
+  }
   return (
     <Nav>
+       <ModalCard isOpen={modalIsOpen} setOpen={setIsOpen} />
       <NavLink to="/">
         <Img src="./brand.png"></Img>
       </NavLink>
@@ -37,7 +43,7 @@ const NavbarPublic = () => {
         })}
         <div>
           <Badge>0</Badge>
-          <Button>
+          <Button onClick={openModal}>
             <FontAwesomeIcon icon={faCartShopping} />
           </Button>
         </div>
