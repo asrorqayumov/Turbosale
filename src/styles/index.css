@@ -1,9 +1,18 @@
 :root {
+  --main: #0c2461;
+  --main-dark: #251e70;
+  --main-light: rgba(37, 30, 112, 0.30196078431372547);
+  --bg-light: #f2f5fa;
+  --white: #fff;
+  --grey: #eee;
+  --light-grey: #f8f8f8;
   --orange: #f96435;
   --green: rgb(37, 173, 37);
-  --main-dark: #251e70;
+  --danger: #f91b62;
   --blue: rgb(55, 125, 255);
   --swiper-theme-color: var(--green);
+  --box-shadow: rgba(9, 30, 66, 0.25098039215686274) 0px 4px 8px -2px,
+    rgba(9, 30, 66, 0.31) 0px 0px 1px;
 }
 
 ::-webkit-scrollbar {
@@ -25,8 +34,8 @@ body {
 .nav-link {
   color: #fff;
   padding: 15px;
-  border-radius: 5px;
   text-decoration: none;
+  border-radius: 5px;
 }
 
 .nav-profile-link {
@@ -35,11 +44,17 @@ body {
   padding-right: 5px;
   font-size: 12px;
 }
-
-.nav-link:hover {
+.nav-sidebar-link{
+  text-decoration: none;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+}
+.nav-link:hover,.nav-sidebar-link:hover {
   background-color: var(--orange);
 }
-.nav-link.active {
+.nav-link.active , .nav-sidebar-link.active{
   background-color: var(--orange);
 }
 
@@ -111,6 +126,10 @@ body {
   background-color: var(--blue);
   border-color: var(--blue);
 }
+.btn-danger{
+   color: #fff;
+   background: var(--danger);
+}
 .btn-dark {
   background-color: var(--main-dark);
   border-color: var(--main-dark);
@@ -178,4 +197,20 @@ body {
 .input-amount::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.profile-img {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  text-decoration: none;
+  color: var(--main);
+  padding-right: 14px;
+}
+.nav-add-link{
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  padding-top: 15px;
+  font-size: 25px
 }

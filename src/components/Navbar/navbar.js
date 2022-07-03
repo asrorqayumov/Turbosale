@@ -1,46 +1,44 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import {RoutersPublic} from "../../utils/Routes";
-import { Nav, Img, Navlist, NavItem, Navright, Button, Badge } from "./style";
+import {
+  Nav,
+  ImgRocket,
+  Button,
+  Badge,
+  Input,
+  ImgCircle,
+  ProfilInfo,
+  Small,
+  Navright,
+  NavLeft,
+} from "./style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import ModalCard from "../ModalCard/ModalCard";
-const NavbarPublic = () => {
+import {defImg,user} from '../../utils/index';
+
+const Navbar = () => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
-  const openModal = ()=>{
-      setIsOpen(true);
-  }
+  const openModal = () => {
+    setIsOpen(true);
+  };
   return (
-    <Nav>
-       <ModalCard isOpen={modalIsOpen} setOpen={setIsOpen} />
-      <NavLink to="/">
-        <Img src="./brand.png"></Img>
+    <Nav shadow >
+      <ModalCard isOpen={modalIsOpen} setOpen={setIsOpen} />
+      <NavLeft>
+      <NavLink to="/products">
+        <ImgRocket src="./favicon.png" />
       </NavLink>
-      <Navlist>
-        {RoutersPublic.map((item) => {
-          if (item.title !== "Sign-in" && item.title !== "Sign-up") {
-            return (
-              <NavItem key={item.id}>
-                <NavLink className="nav-link" to={item.path}>
-                  {item.title}
-                </NavLink>
-              </NavItem>
-            );
-          }
-        })}
-      </Navlist>
+      <Input placeholder="Search..." type="search" />
+      </NavLeft>
       <Navright>
-      {RoutersPublic.map((item) => {
-          if (item.title == "Sign-in" || item.title == "Sign-up") {
-            return (
-              <NavItem key={item.id}>
-                <NavLink className="nav-link" to={item.path}>
-                  {item.title}
-                </NavLink>
-              </NavItem>
-            );
-          }
-        })}
+        <NavLink to="/profile" className="profile-img">
+          <ProfilInfo>
+            <Small>{user.email}</Small>
+            <Small>{user.role=='admin'?'Admin':'Customer'}</Small>
+          </ProfilInfo>
+          <ImgCircle src={user.img || defImg} alt="user image" />
+        </NavLink>
         <div>
           <Badge>0</Badge>
           <Button onClick={openModal}>
@@ -52,4 +50,4 @@ const NavbarPublic = () => {
   );
 };
 
-export default NavbarPublic;
+export default Navbar;

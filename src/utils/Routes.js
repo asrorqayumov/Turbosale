@@ -1,6 +1,8 @@
 import Home from "../pages/Home/home";
 import Signup from "../pages/auth/SignUp";
 import Signin from "../pages/auth/SignIn";
+import { faCartShopping ,faTag,faBagShopping,faCircleQuestion} from "@fortawesome/free-solid-svg-icons";
+
 
 export const RoutersPublic = [
     { id:1, title:"Home", path:'/', element: Home},
@@ -12,6 +14,11 @@ export const RoutersPublic = [
 ]
 
 
-export const Routers = [
-    { title:"Products", path:'/products', element: 'some'}, 
+export  const Routers = [
+    { title:"Products", path:'/products', element: 'some'},
+    { title:"Orders", path:'/orders', element: 'some'},
+    { title:"Purchases", path:'/sales', element: 'some'},
+    { title:"Help", path:'/help', element: 'some'},
+    { title:"Profile", path:'/profile', element: 'some'},
+    { title:"Checkout", path:'/checkout', element: 'some'},
 ]
