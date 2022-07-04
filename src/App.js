@@ -18,7 +18,7 @@ const App = () => {
           {RoutersPublic.map((item) => {
             return (
               <Route
-                key={item.id}
+                key={item.title}
                 path={item.path}
                 element={<item.element />}
               />

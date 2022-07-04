@@ -13,7 +13,7 @@ const Home = () => {
        });
     },[])
   return (
-    <div className="section">
+    <div className="section_public">
       <Carousel />
       <CardWrapper>
         <Card imgUrl="https://api.turbosale.xyz/var/www/uploads/products/5e8693c4a9ad582dbbabc1cb/_eSOgukTVVQWPA80fGmtm.jpg" />

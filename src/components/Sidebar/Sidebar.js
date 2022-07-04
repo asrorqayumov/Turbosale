@@ -10,10 +10,16 @@ import {
   faPowerOff,
   faCirclePlus,
 } from "@fortawesome/free-solid-svg-icons";
+import CreateProductModal from "../ModalCard/CreateProductModal";
 
 const Sidebar = ({ user }) => {
+  const [modalIsOpen, setIsOpen] = React.useState(true);
+  const openModal = ()=>{
+      setIsOpen(true);
+  }
   return (
     <Header>
+      <CreateProductModal isOpen={modalIsOpen} setOpen={setIsOpen} />
       <Logo>
         <NavLink to="/products">
           <Img src="brand.png" />
@@ -51,9 +57,9 @@ const Sidebar = ({ user }) => {
           </Button>
         </ListItem>
         {user.role == "admin" ? (
-          <NavLink to="/addproduct" className="nav-add-link">
+          <button onClick={openModal} className="nav-add-link ">
             <FontAwesomeIcon icon={faCirclePlus} />
-          </NavLink>
+          </button>
         ) : (
           ""
         )}

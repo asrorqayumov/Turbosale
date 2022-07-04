@@ -56,7 +56,7 @@ const SignIn = () => {
 
   const { email, password } = user;
   return (
-    <div className="section">
+    <div className="section_public">
       <FormWrapper>
         <Auth className="auth-wrapper">
           <Link to="/sign-up" style={{ padding: 18 }}>

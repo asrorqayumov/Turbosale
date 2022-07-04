@@ -28,8 +28,15 @@ body {
   font-family: "Roboto", sans-serif;
   font-size: 16px;
 }
-#root {
-  overflow: hidden;
+
+.section_public {
+  padding: 28px 60px;
+  padding-top: 130px;
+}
+.section {
+  padding: 90px 15px 10px 215px;
+  width: 100%;
+  min-height: 100vh;
 }
 .nav-link {
   color: #fff;
@@ -44,24 +51,22 @@ body {
   padding-right: 5px;
   font-size: 12px;
 }
-.nav-sidebar-link{
+.nav-sidebar-link {
   text-decoration: none;
   color: #fff;
   display: flex;
   align-items: center;
   padding: 15px;
 }
-.nav-link:hover,.nav-sidebar-link:hover {
+.nav-link:hover,
+.nav-sidebar-link:hover {
   background-color: var(--orange);
 }
-.nav-link.active , .nav-sidebar-link.active{
+.nav-link.active,
+.nav-sidebar-link.active {
   background-color: var(--orange);
 }
 
-.section {
-  padding: 28px 60px;
-  padding-top: 130px;
-}
 .mySwiper {
   background-color: #eff7ea;
   border-radius: 3px;
@@ -126,9 +131,9 @@ body {
   background-color: var(--blue);
   border-color: var(--blue);
 }
-.btn-danger{
-   color: #fff;
-   background: var(--danger);
+.btn-danger {
+  color: #fff;
+  background: var(--danger);
 }
 .btn-dark {
   background-color: var(--main-dark);
@@ -149,6 +154,57 @@ body {
   font-size: 20px;
   text-decoration: none;
   text-align: center;
+}
+.d-none {
+  display: none;
+}
+.c-blue {
+  color: var(--blue) !important;
+}
+.ReactModal__Overlay {
+  z-index: 15;
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  display: flex;
+  justify-content: end;
+}
+.react-card-modal {
+  position: relative;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  display: flex;
+  flex-direction: column;
+  width: 340px;
+  background-color: white;
+}
+.create_product_modal {
+   width: 50%;
+  background-color: #fff;
+  padding: 12px;
+  border-radius: 4px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.profile-img {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  text-decoration: none;
+  color: var(--main);
+  padding-right: 14px;
+}
+.nav-add-link {
+  color: #fff;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: center;
+  padding-top: 15px;
+  font-size: 25px;
 }
 @media (max-width: 850px) {
   body {
@@ -171,46 +227,8 @@ body {
   }
 }
 
-.d-none {
-  display: none;
-}
-.c-blue {
-  color: var(--blue) !important;
-}
-.ReactModal__Overlay {
-  z-index: 15;
-  background-color: rgba(0, 0, 0, 0.6) !important;
-  display: flex;
-  justify-content: flex-end;
-}
-.react-card-modal {
-  position: relative;
-  right: 0px;
-  top: 0px;
-  bottom: 0px;
-  display: flex;
-  flex-direction: column;
-  width: 340px;
-  background-color: white;
-}
-.input-amount::-webkit-outer-spin-button,
-.input-amount::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-.profile-img {
-  display: flex;
-  -webkit-box-align: center;
-  align-items: center;
-  text-decoration: none;
-  color: var(--main);
-  padding-right: 14px;
-}
-.nav-add-link{
-  color: #fff;
-  text-decoration: none;
-  text-align: center;
-  padding-top: 15px;
-  font-size: 25px
+@media (max-width: 991px) {
+  .section {
+    padding-left: 85px;
+  }
 }
