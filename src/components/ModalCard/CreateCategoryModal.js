@@ -18,24 +18,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import InputField from "../Form/InputField";
 import fileUpload from "../../utils/FileUpload";
-import { CreateProductRequest, GetCategorys } from "../../api/request";
+import { CreateCategoryRequest } from "../../api/request";
 Modal.setAppElement("#root");
 
-const CreateProductModal = ({ isOpen, setOpen }) => {
+const CreateCategoryModal = ({ isOpen, setOpen }) => {
   const [product, setProduct] = useState({
     name: "",
-    price: null,
   });
-  const [categorys, setCategorys] = useState([]);
-  useEffect(() => {
-    GetCategorys()
-      .then((res) => {
-        setCategorys(res.payload);
-        console.log(res.payload);
-      })
-      .catch((err) => console.log(err));
-  }, []);
   const [imgFile, setImgFile] = useState();
+  
 
   const inputHandler = (e) => {
     e.preventDefault();
@@ -51,9 +42,8 @@ const CreateProductModal = ({ isOpen, setOpen }) => {
         formData.append(key, product[key]);
       }
       formData.append("img", e.target.img.files[0]);
-      formData.append("categoryId", e.target.categoryId.value);
       console.log(e.target, Array.from(formData));
-      const response = await CreateProductRequest(formData);
+      const response = await CreateCategoryRequest(formData);
       return response;
     } catch (error) {
       console.log(error);
@@ -72,7 +62,7 @@ const CreateProductModal = ({ isOpen, setOpen }) => {
       className="create_product_modal"
     >
       <Head>
-        <Title>Create Product</Title>
+        <Title>Create Category</Title>
         <Button onClick={() => setOpen(false)}>
           <FontAwesomeIcon icon={faXmark} />
         </Button>
@@ -102,23 +92,18 @@ const CreateProductModal = ({ isOpen, setOpen }) => {
             inputType="text"
             onChange={inputHandler}
           />
-          <InputField
+          {/* <InputField
             title="Price"
             name="price"
             inputType="number"
             onChange={inputHandler}
           />
-          {/* <InputField
+          <InputField
             title="Category"
             name="categoryName"
             inputType="text"
             onChange={inputHandler}
           /> */}
-          <select name="categoryId">
-            {categorys.map((e) => {
-              return <option value={e._id}>{e.name}</option>;
-            })}
-          </select>
           <ButtonWrapper>
             <BtnSubmit className="btn btn-success">Add</BtnSubmit>
           </ButtonWrapper>
@@ -128,4 +113,4 @@ const CreateProductModal = ({ isOpen, setOpen }) => {
   );
 };
 
-export default CreateProductModal;
+export default CreateCategoryModal;

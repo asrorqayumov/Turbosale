@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
-  import {RoutersPublic,Routers} from "./utils/Routes";
+import { RoutersPublic, Routers } from "./utils/Routes";
 import Footer from "./components/Footer/footer";
 import NavbarPublic from "./components/Navbar/navbarPublic";
-import Navbar from './components/Navbar/navbar';
+import Navbar from "./components/Navbar/navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
 import { user } from "./utils/index";
 
-
 const App = () => {
-  let token = localStorage.getItem("token");
+  const [state, setState] = useState("");
+  const token = localStorage.getItem("token");
+
+  const handleAuth = (e) => {
+    setState(e);
+  };
   if (!token) {
     return (
       <div className="App">
@@ -20,7 +24,7 @@ const App = () => {
               <Route
                 key={item.title}
                 path={item.path}
-                element={<item.element />}
+                element={<item.element handleAuth={(e) => handleAuth(e)} />}
               />
             );
           })}
@@ -28,13 +32,13 @@ const App = () => {
         <Footer />
       </div>
     );
-  }
-  return (
-    <div className="App">
-      <Navbar />
-      <Sidebar user={user} />
-       <Routes>
-        {Routers.map((item) => {
+  } else {
+    return (
+      <div className="App">
+        <Navbar />
+        <Sidebar handleAuth={(e) => handleAuth(e)} user={user} />
+        <Routes>
+          {Routers.map((item) => {
             return (
               <Route
                 key={item.title}
@@ -44,8 +48,9 @@ const App = () => {
             );
           })}
         </Routes>
-    </div>
-  );
+      </div>
+    );
+  }
 };
 
 export default App;

@@ -11,7 +11,7 @@ import {
   Icon,
   Button,
 } from "./style";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -19,11 +19,13 @@ import IconHandler from "../../utils/IconHandler";
 import { signInRequest } from "../../api/request";
 import { Toast } from "../../utils/toastify";
 
-const SignIn = () => {
+const SignIn = ({ handleAuth }) => {
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
+
   const inputHandler = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
@@ -40,6 +42,8 @@ const SignIn = () => {
           icon: "success",
           title: "Success",
         });
+        handleAuth(response.data.token);
+        navigate("/products");
       } else {
         Toast.fire({
           icon: "error",

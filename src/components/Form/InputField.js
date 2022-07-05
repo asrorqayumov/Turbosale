@@ -1,15 +1,16 @@
 import React from 'react';
 import { InputItem,Label,Input } from './style';
 
-const InputField = ({input}) => {
+const InputField = ({title,name,inputType,onChange}) => {
     return (
         <InputItem>
-            <Label htmlFor="name">{input.title}</Label>
+            <Label htmlFor={name}>{title}</Label>
             <Input
-              name={input.id}
-              id={input.id}
-              type={input.inputType}
+              name={name}
+              id={name}
+              type={inputType}
               required
+              onChange={onChange}
             />
           </InputItem>
     );

@@ -12,11 +12,15 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import CreateProductModal from "../ModalCard/CreateProductModal";
 
-const Sidebar = ({ user }) => {
-  const [modalIsOpen, setIsOpen] = React.useState(true);
-  const openModal = ()=>{
-      setIsOpen(true);
-  }
+const Sidebar = ({ user, handleAuth }) => {
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const openModal = () => {
+    setIsOpen(true);
+  };
+  const handleSignOut = () => {
+    localStorage.clear();
+    handleAuth();
+  };
   return (
     <Header>
       <CreateProductModal isOpen={modalIsOpen} setOpen={setIsOpen} />
@@ -51,7 +55,13 @@ const Sidebar = ({ user }) => {
           </NavLink>
         </ListItem>
         <ListItem>
-          <Button className="btn btn-danger">
+          <NavLink className="nav-sidebar-link" to="/categories">
+            <FontAwesomeIcon icon={faCirclePlus} />
+            <Span>Categories</Span>
+          </NavLink>
+        </ListItem>
+        <ListItem>
+          <Button onClick={handleSignOut} className="btn btn-danger">
             <FontAwesomeIcon icon={faPowerOff} />
             <Span>Sign Out</Span>
           </Button>

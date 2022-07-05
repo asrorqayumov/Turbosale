@@ -1,12 +1,12 @@
 import Home from "../pages/Home/home";
 import Signup from "../pages/auth/SignUp";
 import Signin from "../pages/auth/SignIn";
-// import CreateProduct from '../pages/CreateProduct/index';
+import Categories from "../pages/Categories/categories";
 
 
 export const RoutersPublic = [
     { title:"Home", path:'/', element: Home},
-    { title:"Products", path:'/products', element: 'some'},
+    // { title:"Productses", path:'/products', element: 'some'},
     { title:"Contact", path:'/contact', element: 'some'},
     { title:"Sign-in", path:'/sign-in', element: Signin},
     { title:"Sign-up", path:'/sign-up', element: Signup},
@@ -21,5 +21,5 @@ export  const Routers = [
     { title:"Help", path:'/help', element: 'some'},
     { title:"Profile", path:'/profile', element: 'some'},
     { title:"Checkout", path:'/checkout', element: 'some'},
-    // { title:"Create Products", path:'/createproduct', element: CreateProduct},
+    { title:"Categories", path:'/categories', element: Categories},
 ]

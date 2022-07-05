@@ -162,7 +162,7 @@ body {
   color: var(--blue) !important;
 }
 .ReactModal__Overlay {
-  z-index: 15;
+  z-index: 50;
   background-color: rgba(0, 0, 0, 0.6) !important;
   display: flex;
   justify-content: end;
@@ -231,4 +231,8 @@ input::-webkit-inner-spin-button {
   .section {
     padding-left: 85px;
   }
+}
+
+.visible{
+  visibility: visible !important;
 }
