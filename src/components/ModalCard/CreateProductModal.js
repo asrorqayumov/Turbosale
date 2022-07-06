@@ -19,12 +19,14 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import InputField from "../Form/InputField";
 import fileUpload from "../../utils/FileUpload";
 import { CreateProductRequest, GetCategorys } from "../../api/request";
+import { Toast } from './../../utils/toastify';
 Modal.setAppElement("#root");
 
 const CreateProductModal = ({ isOpen, setOpen }) => {
   const [product, setProduct] = useState({
     name: "",
     price: null,
+    categoryId: "",
   });
   const [categorys, setCategorys] = useState([]);
   useEffect(() => {
@@ -35,13 +37,11 @@ const CreateProductModal = ({ isOpen, setOpen }) => {
       })
       .catch((err) => console.log(err));
   }, []);
-  const [imgFile, setImgFile] = useState();
 
   const inputHandler = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
     setProduct({ ...product, [name]: value });
-    console.log(product);
   };
   const formHandler = async (e) => {
     e.preventDefault();
@@ -51,9 +51,12 @@ const CreateProductModal = ({ isOpen, setOpen }) => {
         formData.append(key, product[key]);
       }
       formData.append("img", e.target.img.files[0]);
-      formData.append("categoryId", e.target.categoryId.value);
-      console.log(e.target, Array.from(formData));
       const response = await CreateProductRequest(formData);
+      setOpen(false);
+      Toast.fire({
+        icon: "success",
+        title: "Product has created",
+      });
       return response;
     } catch (error) {
       console.log(error);
@@ -88,7 +91,7 @@ const CreateProductModal = ({ isOpen, setOpen }) => {
               id="product_img_input"
               name="img"
               accept="image/*"
-              onChange={(e) => fileUpload(e, setImgFile)}
+              onChange={(e) => fileUpload(e)}
             />
             <LabelFile className="btn btn-orange" htmlFor="product_img_input">
               Upload image
@@ -108,13 +111,7 @@ const CreateProductModal = ({ isOpen, setOpen }) => {
             inputType="number"
             onChange={inputHandler}
           />
-          {/* <InputField
-            title="Category"
-            name="categoryName"
-            inputType="text"
-            onChange={inputHandler}
-          /> */}
-          <select name="categoryId">
+          <select name="categoryId" onChange={inputHandler}>
             {categorys.map((e) => {
               return <option value={e._id}>{e.name}</option>;
             })}

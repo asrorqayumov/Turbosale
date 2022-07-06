@@ -15,33 +15,17 @@ export function GetProducts(page = 1) {
     .then((res) => res.data)
     .catch((err) => err);
 }
-
-export function GetCategorys() {
-  return axios
-  .get(`/categories`)
-  .then((res) => res.data)
-  .catch((err) => err);
-}
-export function GetCarts() {
-  return axios
-    .get(`/cart`)
-    .then((res) => res.data)
-    .catch((err) => err);
-}
-
-export async function GetUserById(id) {
-  try {
-    const res = await axios.get(`/users/${id}`);
-    return res.data;
-  } catch (error) {
-    throw new Error(error.message);
-  }
-}
-
 export function CreateProductRequest(formData) {
   axios
     .post("/products", formData)
     .then((res) => res)
+    .catch((err) => err);
+}
+// Categorys
+export function GetCategorys() {
+  return axios
+    .get(`/categories`)
+    .then((res) => res.data)
     .catch((err) => err);
 }
 export function CreateCategoryRequest(formData) {
@@ -51,6 +35,10 @@ export function CreateCategoryRequest(formData) {
     .catch((err) => err);
 }
 
-export function FileUploadRequest(file) {
-  axios.post("/files", file);
+// Carts
+export function GetCarts() {
+  return axios
+    .get(`/cart`)
+    .then((res) => res.data)
+    .catch((err) => err);
 }

@@ -19,15 +19,13 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import InputField from "../Form/InputField";
 import fileUpload from "../../utils/FileUpload";
 import { CreateCategoryRequest } from "../../api/request";
+import { Toast } from "../../utils/toastify";
 Modal.setAppElement("#root");
 
 const CreateCategoryModal = ({ isOpen, setOpen }) => {
   const [product, setProduct] = useState({
     name: "",
   });
-  const [imgFile, setImgFile] = useState();
-  
-
   const inputHandler = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
@@ -42,8 +40,12 @@ const CreateCategoryModal = ({ isOpen, setOpen }) => {
         formData.append(key, product[key]);
       }
       formData.append("img", e.target.img.files[0]);
-      console.log(e.target, Array.from(formData));
       const response = await CreateCategoryRequest(formData);
+      setOpen(false);
+      Toast.fire({
+        icon: "success",
+        title: "Category has created",
+      });
       return response;
     } catch (error) {
       console.log(error);
@@ -78,7 +80,7 @@ const CreateCategoryModal = ({ isOpen, setOpen }) => {
               id="product_img_input"
               name="img"
               accept="image/*"
-              onChange={(e) => fileUpload(e, setImgFile)}
+              onChange={(e) => fileUpload(e)}
             />
             <LabelFile className="btn btn-orange" htmlFor="product_img_input">
               Upload image

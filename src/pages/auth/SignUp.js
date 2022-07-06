@@ -21,7 +21,7 @@ import IconHandler from "../../utils/IconHandler";
 import { signUpRequest } from "../../api/request";
 import { Toast } from "../../utils/toastify";
 
-const SignUp = () => {
+const SignUp = ({ handleAuth }) => {
   let navigate = useNavigate();
   const [user, setUser] = useState({
     fullName: "",
@@ -44,7 +44,8 @@ const SignUp = () => {
         icon: "success",
         title: "Success",
       });
-      navigate("/sign-in");
+      handleAuth(response.data.token);
+      navigate("/products");
     } catch (error) {
       Toast.fire({
         icon: "error",
