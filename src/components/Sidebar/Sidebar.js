@@ -54,12 +54,16 @@ const Sidebar = ({ user, handleAuth }) => {
             <Span>Help</Span>
           </NavLink>
         </ListItem>
-        <ListItem>
-          <NavLink className="nav-sidebar-link" to="/categories">
-            <FontAwesomeIcon icon={faCirclePlus} />
-            <Span>Categories</Span>
-          </NavLink>
-        </ListItem>
+        {user.role == "admin" ? (
+          <ListItem>
+            <NavLink className="nav-sidebar-link" to="/categories">
+              <FontAwesomeIcon icon={faCirclePlus} />
+              <Span>Categories</Span>
+            </NavLink>
+          </ListItem>
+        ) : (
+          ""
+        )}
         <ListItem>
           <Button onClick={handleSignOut} className="btn btn-danger">
             <FontAwesomeIcon icon={faPowerOff} />

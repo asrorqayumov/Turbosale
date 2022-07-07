@@ -27,7 +27,7 @@ const ModalCard = ({ isOpen, setOpen }) => {
         setCarts(res.payload.items);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [carts]);
 
   return (
     <Modal

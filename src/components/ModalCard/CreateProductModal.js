@@ -13,13 +13,16 @@ import {
   Img,
   BtnSubmit,
   ButtonWrapper,
+  Select,
+  Textarea,
 } from "./style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import InputField from "../Form/InputField";
 import fileUpload from "../../utils/FileUpload";
 import { CreateProductRequest, GetCategorys } from "../../api/request";
-import { Toast } from './../../utils/toastify';
+import { Toast } from "./../../utils/toastify";
+import { InputItem, Label } from "../Form/style";
 Modal.setAppElement("#root");
 
 const CreateProductModal = ({ isOpen, setOpen }) => {
@@ -27,13 +30,13 @@ const CreateProductModal = ({ isOpen, setOpen }) => {
     name: "",
     price: null,
     categoryId: "",
+    description: "",
   });
   const [categorys, setCategorys] = useState([]);
   useEffect(() => {
     GetCategorys()
       .then((res) => {
         setCategorys(res.payload);
-        console.log(res.payload);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -111,11 +114,22 @@ const CreateProductModal = ({ isOpen, setOpen }) => {
             inputType="number"
             onChange={inputHandler}
           />
-          <select name="categoryId" onChange={inputHandler}>
-            {categorys.map((e) => {
-              return <option value={e._id}>{e.name}</option>;
-            })}
-          </select>
+          <InputItem>
+            <Label> Category</Label>
+            <Select name="categoryId" onChange={inputHandler}>
+              {categorys.map((e) => {
+                return <option key={e._id} value={e._id}>{e.name}</option>;
+              })}
+            </Select>
+          </InputItem>
+          <InputItem>
+            <Label>Description</Label>
+            <Textarea
+              name="description"
+              onChange={inputHandler}
+              id=""
+            ></Textarea>
+          </InputItem>
           <ButtonWrapper>
             <BtnSubmit className="btn btn-success">Add</BtnSubmit>
           </ButtonWrapper>

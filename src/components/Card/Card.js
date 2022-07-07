@@ -12,17 +12,20 @@ import {
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import { defProductImg } from "../../utils";
 
-const Card = ({imgUrl}) => {
+const Card = ({product:{img,name,price,_id}}) => {
   return (
     <CardW>
       <CardImgW>
-        <CardImg src={imgUrl} />
+        <Link to={`/product/${_id}`}>
+          <CardImg src={img||defProductImg} />
+        </Link>
       </CardImgW>
       <CardInfo>
-        <CardTitle>Card Title</CardTitle>
+        <CardTitle>{name}</CardTitle>
         <CardPrice>
-          <CardPriceItem>4044</CardPriceItem>
+          <CardPriceItem>{price}</CardPriceItem>
         </CardPrice>
         <Link to="/" className="card-btn">
           <CardIcon>

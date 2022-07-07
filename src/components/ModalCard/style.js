@@ -118,9 +118,33 @@ export const RightSide = styled.div`
 
 export const BtnSubmit = styled.button`
   margin-top: auto;
-`
+`;
 export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   margin-top: auto;
+`;
+
+export const Select = styled.select`
+  width: 100%;
+  height: 44px;
+  background-color: #dedbdbad;
+  border-radius: 0.5rem;
+  padding: 0 1rem;
+  border: 2px solid transparent;
+  font-size: 1rem;
+  outline: none;
+`;
+
+export const Textarea = styled.textarea` 
+  width: 100%;
+  max-width: 100%;
+  min-width: 100%;
+  height: 44px;
+  background-color: #dedbdbad;
+  border-radius: 0.5rem;
+  padding: 0 1rem;
+  border: 2px solid transparent;
+  font-size: 1rem;
+  outline: none;
 `

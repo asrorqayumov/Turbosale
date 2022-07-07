@@ -16,10 +16,9 @@ const Home = () => {
     <div className="section_public">
       <Carousel />
       <CardWrapper>
-        <Card imgUrl="https://api.turbosale.xyz/var/www/uploads/products/5e8693c4a9ad582dbbabc1cb/_eSOgukTVVQWPA80fGmtm.jpg" />
-        <Card imgUrl="https://api.turbosale.xyz/var/www/uploads/products/5e8693c4a9ad582dbbabc1cb/_eSOgukTVVQWPA80fGmtm.jpg" />
-        <Card imgUrl="https://api.turbosale.xyz/var/www/uploads/products/5e8693c4a9ad582dbbabc1cb/_eSOgukTVVQWPA80fGmtm.jpg" />
-        <Card imgUrl="https://api.turbosale.xyz/var/www/uploads/products/5e8693c4a9ad582dbbabc1cb/_eSOgukTVVQWPA80fGmtm.jpg" />
+         {products.map((item)=>{
+         return <Card key={item._id} product={item} />
+         })}
       </CardWrapper>
     </div>
   );

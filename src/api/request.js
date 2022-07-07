@@ -15,6 +15,12 @@ export function GetProducts(page = 1) {
     .then((res) => res.data)
     .catch((err) => err);
 }
+export function GetProduct(id) {
+  return axios
+    .get(`/products/${id}`)
+    .then((res) => res.data)
+    .catch((err) => err);
+}
 export function CreateProductRequest(formData) {
   axios
     .post("/products", formData)

@@ -81,6 +81,7 @@ const CreateCategoryModal = ({ isOpen, setOpen }) => {
               name="img"
               accept="image/*"
               onChange={(e) => fileUpload(e)}
+              
             />
             <LabelFile className="btn btn-orange" htmlFor="product_img_input">
               Upload image
@@ -94,18 +95,6 @@ const CreateCategoryModal = ({ isOpen, setOpen }) => {
             inputType="text"
             onChange={inputHandler}
           />
-          {/* <InputField
-            title="Price"
-            name="price"
-            inputType="number"
-            onChange={inputHandler}
-          />
-          <InputField
-            title="Category"
-            name="categoryName"
-            inputType="text"
-            onChange={inputHandler}
-          /> */}
           <ButtonWrapper>
             <BtnSubmit className="btn btn-success">Add</BtnSubmit>
           </ButtonWrapper>

@@ -6,6 +6,7 @@ import NavbarPublic from "./components/Navbar/navbarPublic";
 import Navbar from "./components/Navbar/navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
 import { user } from "./utils/index";
+import ProductDetails from "./pages/productdetails/productDetails";
 
 const App = () => {
   const [state, setState] = useState("");
@@ -19,6 +20,7 @@ const App = () => {
       <div className="App">
         <NavbarPublic />
         <Routes>
+        <Route path="/product/:id" element={<ProductDetails/>} />
           {RoutersPublic.map((item) => {
             return (
               <Route

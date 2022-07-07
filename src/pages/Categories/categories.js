@@ -12,7 +12,7 @@ const Categories = () => {
         <>
          <CreateCategoryModal isOpen={modalIsOpen} setOpen={setIsOpen} />
         <div className='section'>
-           <button onClick={openModal} className='btn btn-success'>Create Product</button>
+           <button onClick={openModal} className='btn btn-success'>Create Category</button>
         </div>
         </>
     );

@@ -20,7 +20,7 @@ const NavbarPublic = () => {
         {RoutersPublic.map((item) => {
           if (item.title !== "Sign-in" && item.title !== "Sign-up") {
             return (
-              <NavItem key={item.id}>
+              <NavItem key={item.title}>
                 <NavLink className="nav-link" to={item.path}>
                   {item.title}
                 </NavLink>
@@ -33,7 +33,7 @@ const NavbarPublic = () => {
       {RoutersPublic.map((item) => {
           if (item.title == "Sign-in" || item.title == "Sign-up") {
             return (
-              <NavItem key={item.id}>
+              <NavItem key={item.title}>
                 <NavLink className="nav-link" to={item.path}>
                   {item.title}
                 </NavLink>
