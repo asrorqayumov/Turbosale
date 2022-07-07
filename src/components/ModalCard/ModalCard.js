@@ -24,7 +24,7 @@ const ModalCard = ({ isOpen, setOpen }) => {
   useEffect(() => {
     GetCarts()
       .then((res) => {
-        setCarts(res.payload.items);
+        setCarts(res?.payload?.items);
       })
       .catch((err) => console.log(err));
   }, [carts]);

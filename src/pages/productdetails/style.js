@@ -30,7 +30,7 @@ export const ModalDialog = styled.div`
   box-shadow: var(--box-shadow);
   position: relative;
   color: rgb(66, 69, 97);
-  @media (max-width:768px){
+  @media (max-width: 768px) {
     flex-direction: column;
   }
 `;
@@ -38,8 +38,13 @@ export const ModalDialog = styled.div`
 export const ModalContent = styled.div`
   padding: 50px;
   width: ${(props) => (props.left ? "40%" : "60%")};
-  @media (max-width:768px){
+  @media (max-width: 768px) {
     width: 100%;
+    &:last-of-type {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
   &:first-of-type {
     display: flex;
@@ -54,8 +59,8 @@ export const Img = styled.img`
   width: 100%;
   max-width: 300px;
   min-width: 260px;
-  @media (max-width:768px){
-   min-width: auto;
+  @media (max-width: 768px) {
+    min-width: auto;
   }
 `;
 
@@ -92,7 +97,7 @@ export const CountWrapper = styled.div`
   font-size: 16px;
 `;
 
-export const Button = styled.button`
+export const Button = styled.span`
   width: 32px;
   height: 100%;
   display: flex;
@@ -101,16 +106,16 @@ export const Button = styled.button`
   top: 0px;
   background-color: transparent;
   cursor: pointer;
-  left: auto;  
+  left: auto;
   justify-content: center;
   color: var(--main-dark);
   border-width: 0px;
   padding: 0px;
-  &:last-of-type{
+  &:last-of-type {
     border-left: 1px solid;
     right: 0px;
   }
-  &:first-of-type{
+  &:first-of-type {
     border-right: 1px solid;
   }
 `;

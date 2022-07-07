@@ -40,6 +40,7 @@ const App = () => {
         <Navbar />
         <Sidebar handleAuth={(e) => handleAuth(e)} user={user} />
         <Routes>
+        <Route path="/products/:id" element={<ProductDetails/>} />
           {Routers.map((item) => {
             return (
               <Route

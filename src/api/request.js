@@ -48,3 +48,10 @@ export function GetCarts() {
     .then((res) => res.data)
     .catch((err) => err);
 }
+
+export function AddCart(id,data) {
+  return axios
+    .post(`/cart/${id}/add`,data)
+    .then((res) => res.data)
+    .catch((err) => err);
+}
