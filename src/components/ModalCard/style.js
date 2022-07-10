@@ -148,3 +148,13 @@ export const Textarea = styled.textarea`
   font-size: 1rem;
   outline: none;
 `
+export const WrapperX = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+`
+export const BtnX =styled.button`
+  color: #000;
+  background: transparent;
+  font-size: 16px;
+`

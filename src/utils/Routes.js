@@ -1,7 +1,10 @@
+// outside
 import Home from "../pages/Home/home";
 import Signup from "../pages/auth/SignUp";
 import Signin from "../pages/auth/SignIn";
-import Categories from "../pages/Categories/categories";;
+// Inside
+import Categories from "../pages/Categories/categories";
+import Products from '../pages/Products/index'
 
 
 export const RoutersPublic = [
@@ -15,7 +18,7 @@ export const RoutersPublic = [
 
 
 export  const Routers = [
-    { title:"Products", path:'/products', element: 'some'},
+    { title:"Products", path:'/products', element: Products},
     { title:"Orders", path:'/orders', element: 'some'},
     { title:"Purchases", path:'/sales', element: 'some'},
     { title:"Help", path:'/help', element: 'some'},

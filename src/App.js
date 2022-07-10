@@ -7,32 +7,33 @@ import Navbar from "./components/Navbar/navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
 import { user } from "./utils/index";
 import ProductDetails from "./pages/productdetails/productDetails";
-
+import IsPublicContext from "./context/isPublicContext";
 const App = () => {
   const [state, setState] = useState("");
-  const token = localStorage.getItem("token");
-
+  const token = localStorage.getItem('token');
   const handleAuth = (e) => {
     setState(e);
   };
   if (!token) {
     return (
-      <div className="App">
-        <NavbarPublic />
-        <Routes>
-        <Route path="/product/:id" element={<ProductDetails/>} />
-          {RoutersPublic.map((item) => {
-            return (
-              <Route
-                key={item.title}
-                path={item.path}
-                element={<item.element handleAuth={(e) => handleAuth(e)} />}
-              />
-            );
-          })}
-        </Routes>
-        <Footer />
-      </div>
+      <IsPublicContext.Provider value={true}>
+        <div className="App">
+          <NavbarPublic />
+          <Routes>
+            <Route path="/product/:id" element={<ProductDetails />} />
+            {RoutersPublic.map((item) => {
+              return (
+                <Route  
+                  key={item.title}
+                  path={item.path}
+                  element={<item.element handleAuth={(e) => handleAuth(e)} />}
+                />
+              );
+            })}
+          </Routes>
+          <Footer />
+        </div>
+       </IsPublicContext.Provider>
     );
   } else {
     return (
@@ -40,7 +41,6 @@ const App = () => {
         <Navbar />
         <Sidebar handleAuth={(e) => handleAuth(e)} user={user} />
         <Routes>
-        <Route path="/products/:id" element={<ProductDetails/>} />
           {Routers.map((item) => {
             return (
               <Route
@@ -50,6 +50,7 @@ const App = () => {
               />
             );
           })}
+          <Route path="/products/:id" element={<ProductDetails />} />
         </Routes>
       </div>
     );
