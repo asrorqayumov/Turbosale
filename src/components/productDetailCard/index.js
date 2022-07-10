@@ -19,10 +19,10 @@ import { GetProduct } from "../../api/request";
 import { defProductImg } from "../../utils";
 import { AddCart } from "../../api/request";
 import { Toast } from "./../../utils/toastify";
-import { user } from "../../utils";
 
-const ProductDetailsCard = ({ productId }) => {
+const ProductDetailsCard = ({ productId,setOpen}) => {
   let params = useParams();
+  const user = JSON.parse(localStorage.getItem('user'));
   const [product, setProduct] = useState({});
   let [total, setTotal] = useState(1);
   useEffect(() => {
@@ -46,6 +46,7 @@ const ProductDetailsCard = ({ productId }) => {
           icon: "success",
           title: "Product has added",
         });
+        setOpen(false)
       }
     } catch (error) {
       console.log(error);

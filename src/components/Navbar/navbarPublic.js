@@ -18,7 +18,7 @@ const NavbarPublic = () => {
       </NavLink>
       <Navlist>
         {RoutersPublic.map((item) => {
-          if (item.title !== "Sign-in" && item.title !== "Sign-up") {
+          if (item.title !== "Sign-in" && item.title !== "Sign-up"  && item.title !== "Cart") {
             return (
               <NavItem key={item.title}>
                 <NavLink className="nav-link" to={item.path}>

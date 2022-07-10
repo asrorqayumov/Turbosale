@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -8,31 +8,59 @@ import {
   BtnAmount,
   InputAmount,
   ButtonX,
+  Title,
+  Price,
 } from "./style";
-const CardModal = () => {
+import { AddCart } from "../../api/request";
+
+const CardModal = ({ setCarts, item, item: { product } }) => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  let [total, setTotal] = useState(item.total);
+  const inputHandler = async (e) => {
+    setTotal(e?.target?.value);
+    try {
+      const res = await AddCart(user._id, {
+        product: { ...product },
+        total: total,
+        qty: total * product.price,
+      });
+      if (res.success) {
+        setCarts(res?.payload?.items);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Card>
-      <Img
-        src="https://api.turbosale.xyz/var/www/uploads/products/5e8693c4a9ad582dbbabc1cb/_eSOgukTVVQWPA80fGmtm.jpg"
-        alt="product-img"
-      />
-      <p>product title </p>
+      <Img src={product.img} alt="product-img" />
+      <Title> {product.name} </Title>
       <WrapperAmount>
-        <BtnAmount>
+        <BtnAmount
+          onClick={() => {
+            setTotal((total -= 1));
+          }}
+        >
           <FontAwesomeIcon icon={faMinus} />
         </BtnAmount>
         <InputAmount
-          defaultValue={1}
           type="number"
+          onChange={inputHandler}
           className="input-amount"
-          placeholder="0"
           name="amount"
+          value={total}
+          min="1"
         />
-        <BtnAmount>
+        <BtnAmount
+          onClick={() => {
+            setTotal((total += 1));
+          }}
+        >
           <FontAwesomeIcon icon={faPlus} />
         </BtnAmount>
       </WrapperAmount>
-      <p>17,440</p>
+      <Price>{product.price * total}</Price>
       <ButtonX>
         <FontAwesomeIcon icon={faXmark} />
       </ButtonX>

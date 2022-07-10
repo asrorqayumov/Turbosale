@@ -25,11 +25,14 @@ export const ModalBody = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  overflow: scroll;
+  width: 100%;
 `;
 export const CardsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 `;
 export const ButtonClear = styled.button`
   border: none;
@@ -136,7 +139,7 @@ export const Select = styled.select`
   outline: none;
 `;
 
-export const Textarea = styled.textarea` 
+export const Textarea = styled.textarea`
   width: 100%;
   max-width: 100%;
   min-width: 100%;
@@ -147,14 +150,14 @@ export const Textarea = styled.textarea`
   border: 2px solid transparent;
   font-size: 1rem;
   outline: none;
-`
+`;
 export const WrapperX = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-end;
-`
-export const BtnX =styled.button`
+`;
+export const BtnX = styled.button`
   color: #000;
   background: transparent;
   font-size: 16px;
-`
+`;

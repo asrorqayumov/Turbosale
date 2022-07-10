@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import {
   Nav,
@@ -15,16 +15,26 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import ModalCard from "../ModalCard/ModalCard";
-import {defImg,user} from '../../utils/index';
+import { GetCarts } from "../../api/request";
 
 const Navbar = () => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
+  const user = JSON.parse(localStorage.getItem('user'));
+  const defImg = './user-img.png';
   const openModal = () => {
     setIsOpen(true);
   };
+  const [carts, setCarts] = useState([]);
+  useEffect(() => {
+    GetCarts()
+      .then((res) => {
+        setCarts(res?.payload?.[0].items);
+      })
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <Nav shadow >
-      <ModalCard isOpen={modalIsOpen} setOpen={setIsOpen} />
+      <ModalCard isOpen={modalIsOpen} setCart={setCarts} setOpen={setIsOpen} />
       <NavLeft>
       <NavLink to="/products">
         <ImgRocket src="./favicon.png" />
@@ -40,7 +50,7 @@ const Navbar = () => {
           <ImgCircle src={user.img || defImg} alt="user image" />
         </NavLink>
         <div>
-          <Badge>0</Badge>
+          <Badge>{carts.length}</Badge>
           <Button onClick={openModal}>
             <FontAwesomeIcon icon={faCartShopping} />
           </Button>

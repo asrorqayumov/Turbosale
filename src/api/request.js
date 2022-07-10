@@ -55,3 +55,16 @@ export function AddCart(id,data) {
     .then((res) => res.data)
     .catch((err) => err);
 }
+
+export function ClearCart(id) {
+  return axios
+    .delete(`/cart/${id}/empty`)
+    .then((res) => res.data)
+    .catch((err) => err);
+}
+export function RemoveCart(id,data) {
+  return axios
+    .delete(`/cart/${id}/remove`,data)
+    .then((res) => res.data)
+    .catch((err) => err);
+}

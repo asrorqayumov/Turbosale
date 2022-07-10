@@ -23,7 +23,7 @@ const AddCardModal = ({ productId, isOpen, setOpen }) => {
             <FontAwesomeIcon icon={faXmark} />
           </BtnX>
         </WrapperX>
-       <ProductDetailsCard productId={productId} />
+       <ProductDetailsCard productId={productId} setOpen={setOpen} />
     </Modal>
   );
 };

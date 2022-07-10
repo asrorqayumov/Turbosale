@@ -59,7 +59,7 @@ export const Card = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   margin-bottom: 15px;
 `;
 
@@ -106,3 +106,11 @@ export const ButtonX = styled.button`
   font-size: 12px;
   color: var(--orange);
 `;
+
+export const Title = styled.p`
+  width: 20%;
+`
+export const Price = styled.p`
+  width:15%;
+ min-width:15%;
+`

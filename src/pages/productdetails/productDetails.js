@@ -1,7 +1,7 @@
 import React,{useContext} from "react";
 import { Details, WrapperDetails } from "./style";
 import ProductDetailsCard from "../../components/productDetailCard"; 
-import IsPublicContext from "../../context/isPublicContext";
+import {IsPublicContext} from "../../context";
 
 const ProductDetails = () => {
     const IsPublic =  useContext(IsPublicContext)

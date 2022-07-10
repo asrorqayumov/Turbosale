@@ -38,14 +38,21 @@ const SignUp = ({ handleAuth }) => {
     e.preventDefault();
     try {
       const response = await signUpRequest(user);
-      localStorage.setItem("token", response.data.token);
-      localStorage.setItem("user", JSON.stringify(response.data.user));
-      Toast.fire({
-        icon: "success",
-        title: "Success",
-      });
-      handleAuth(response.data.token);
-      navigate("/products");
+      if (response.success) {
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+        Toast.fire({
+          icon: "success",
+          title: "Success",
+        });
+        handleAuth(response.data.token);
+        navigate("/products");
+      } else {
+        Toast.fire({
+          icon: "error",
+          title: `${response?.data.msg}`,
+        });
+      }
     } catch (error) {
       Toast.fire({
         icon: "error",
@@ -90,7 +97,6 @@ const SignUp = ({ handleAuth }) => {
               </Icon>
             </Label>
             <Label>
-              
               <Input
                 onChange={inputHandler}
                 type="password"

@@ -5,12 +5,12 @@ import Footer from "./components/Footer/footer";
 import NavbarPublic from "./components/Navbar/navbarPublic";
 import Navbar from "./components/Navbar/navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
-import { user } from "./utils/index";
 import ProductDetails from "./pages/productdetails/productDetails";
-import IsPublicContext from "./context/isPublicContext";
+import { IsPublicContext } from "./context";
 const App = () => {
   const [state, setState] = useState("");
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
+  const user = JSON.parse(localStorage.getItem("user"));
   const handleAuth = (e) => {
     setState(e);
   };
@@ -23,7 +23,7 @@ const App = () => {
             <Route path="/product/:id" element={<ProductDetails />} />
             {RoutersPublic.map((item) => {
               return (
-                <Route  
+                <Route
                   key={item.title}
                   path={item.path}
                   element={<item.element handleAuth={(e) => handleAuth(e)} />}
@@ -33,7 +33,7 @@ const App = () => {
           </Routes>
           <Footer />
         </div>
-       </IsPublicContext.Provider>
+      </IsPublicContext.Provider>
     );
   } else {
     return (

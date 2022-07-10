@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import Modal from "react-modal";
 import CardModal from "../Card/CardModal";
@@ -15,19 +15,28 @@ import {
   Title,
   Text,
 } from "./style";
-import { GetCarts } from "../../api/request";
+import { ClearCart, GetCarts } from "../../api/request";
 
 Modal.setAppElement("#root");
-const ModalCard = ({ isOpen, setOpen }) => {
+const ModalCard = ({ isOpen, setOpen, setCart }) => {
+  const user = JSON.parse(localStorage.getItem("user"));
   const [carts, setCarts] = useState([]);
-
   useEffect(() => {
     GetCarts()
       .then((res) => {
-        setCarts(res?.payload?.items);
+        setCarts(res?.payload?.[0].items);
       })
       .catch((err) => console.log(err));
-  }, [carts]);
+  }, []);
+
+  const clearCart = async () => {
+    const res = await ClearCart(user._id)
+      .then((res) => {
+        setCarts(res?.payload?.items);
+        setCart(res?.payload?.items)
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <Modal
@@ -41,19 +50,22 @@ const ModalCard = ({ isOpen, setOpen }) => {
           <FontAwesomeIcon icon={faXmark} />
         </CloseButton>
       </ModalTitle>
-      {carts ? (
+      {carts.length != 0 ? (
         <ModalBody>
           <CardsWrapper>
             {carts.map((item) => {
-              <CardModal card={item} />;
+              return <CardModal key={item.product._id} setCarts={setCarts} item={item} />;
             })}
-            <ButtonClear href="">
+            <ButtonClear onClick={clearCart}>
               <FontAwesomeIcon icon={faTrash} style={{ paddingRight: "5px" }} />
               Clear the list
             </ButtonClear>
           </CardsWrapper>
           <Link to="/" className="btn btn-orange modal-btn">
-            Order
+            { carts.reduce((pre,curr)=>{
+                return pre + curr.total * curr.product.price
+            },0)
+            } Order
           </Link>
         </ModalBody>
       ) : (
