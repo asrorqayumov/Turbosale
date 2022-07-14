@@ -3,13 +3,13 @@ import { Details, WrapperDetails } from "./style";
 import ProductDetailsCard from "../../components/productDetailCard"; 
 import {IsPublicContext} from "../../context";
 
-const ProductDetails = () => {
+const ProductDetails = ({setState}) => {
     const IsPublic =  useContext(IsPublicContext)
   return (
     <div className={IsPublic?'section_public':'section'}>
       <WrapperDetails>
         <Details>
-          <ProductDetailsCard />
+          <ProductDetailsCard setState={setState} />
         </Details>
       </WrapperDetails>
     </div>

@@ -15,22 +15,14 @@ import { AddCart } from "../../api/request";
 
 const CardModal = ({ setCarts, item, item: { product } }) => {
   const user = JSON.parse(localStorage.getItem("user"));
-  let [total, setTotal] = useState(item.total);
+  let [total, setTotal] = useState(+item.total);
   const inputHandler = async (e) => {
-    setTotal(e?.target?.value);
-    try {
-      const res = await AddCart(user._id, {
-        product: { ...product },
-        total: total,
-        qty: total * product.price,
-      });
-      if (res.success) {
-        setCarts(res?.payload?.items);
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    setTotal(+e?.target?.value);
   };
+
+  const removeHander = ()=>{
+       
+  }
 
   return (
     <Card>
@@ -49,7 +41,7 @@ const CardModal = ({ setCarts, item, item: { product } }) => {
           onChange={inputHandler}
           className="input-amount"
           name="amount"
-          value={total}
+          value={+total}
           min="1"
         />
         <BtnAmount
@@ -60,8 +52,8 @@ const CardModal = ({ setCarts, item, item: { product } }) => {
           <FontAwesomeIcon icon={faPlus} />
         </BtnAmount>
       </WrapperAmount>
-      <Price>{product.price * total}</Price>
-      <ButtonX>
+      <Price>{product.price * +total}</Price>
+      <ButtonX onClick={removeHander}>
         <FontAwesomeIcon icon={faXmark} />
       </ButtonX>
     </Card>

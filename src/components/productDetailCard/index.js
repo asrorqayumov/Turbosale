@@ -20,7 +20,7 @@ import { defProductImg } from "../../utils";
 import { AddCart } from "../../api/request";
 import { Toast } from "./../../utils/toastify";
 
-const ProductDetailsCard = ({ productId,setOpen}) => {
+const ProductDetailsCard = ({productId,setOpen}) => {
   let params = useParams();
   const user = JSON.parse(localStorage.getItem('user'));
   const [product, setProduct] = useState({});

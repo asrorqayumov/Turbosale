@@ -84,7 +84,7 @@ export const WrapperAmount = styled.div`
   font-size: 12px;
   margin: 0px 10px 0px 10px;
 `;
-export const BtnAmount = styled.button`
+export const BtnAmount = styled.span`
   cursor: pointer;
   border: none;
   padding: 0px 2px;

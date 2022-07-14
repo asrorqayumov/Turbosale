@@ -5,14 +5,14 @@ import { Nav, Img, Navlist, NavItem, Navright, Button, Badge } from "./style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import ModalCard from "../ModalCard/ModalCard";
-const NavbarPublic = () => {
+const NavbarPublic = ({carts,setCarts}) => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const openModal = ()=>{
       setIsOpen(true);
   }
   return (
     <Nav public >
-       <ModalCard isOpen={modalIsOpen} setOpen={setIsOpen} />
+       <ModalCard isOpen={modalIsOpen} carts={carts} setCarts={setCarts}  setOpen={setIsOpen} />
       <NavLink to="/">
         <Img src="./brand.png"></Img>
       </NavLink>
@@ -42,7 +42,7 @@ const NavbarPublic = () => {
           }
         })}
         <div>
-          <Badge public>0</Badge>
+          <Badge public>{carts.length}</Badge>
           <Button onClick={openModal} public>
             <FontAwesomeIcon icon={faCartShopping} />
           </Button>

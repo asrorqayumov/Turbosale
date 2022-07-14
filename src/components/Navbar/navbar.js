@@ -15,37 +15,37 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import ModalCard from "../ModalCard/ModalCard";
-import { GetCarts } from "../../api/request";
 
-const Navbar = () => {
+const Navbar = ({ setSearchTerm,carts, setCarts }) => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
-  const user = JSON.parse(localStorage.getItem('user'));
-  const defImg = './user-img.png';
+  const user = JSON.parse(localStorage.getItem("user"));
+  const defImg = "./user-img.png";
   const openModal = () => {
     setIsOpen(true);
   };
-  const [carts, setCarts] = useState([]);
-  useEffect(() => {
-    GetCarts()
-      .then((res) => {
-        setCarts(res?.payload?.[0].items);
-      })
-      .catch((err) => console.log(err));
-  }, []);
   return (
-    <Nav shadow >
-      <ModalCard isOpen={modalIsOpen} setCart={setCarts} setOpen={setIsOpen} />
+    <Nav shadow>
+      <ModalCard
+        isOpen={modalIsOpen}
+        carts={carts}
+        setCarts={setCarts}
+        setOpen={setIsOpen}
+      />
       <NavLeft>
-      <NavLink to="/products">
-        <ImgRocket src="./favicon.png" />
-      </NavLink>
-      <Input placeholder="Search..." type="search" />
+        <NavLink to="/products">
+          <ImgRocket src="./favicon.png" />
+        </NavLink>
+        <Input
+         placeholder="Search..." 
+         type="search" 
+         onChange={(e)=>setSearchTerm(e.target.value)}
+         />
       </NavLeft>
       <Navright>
         <NavLink to="/profile" className="profile-img">
           <ProfilInfo>
             <Small>{user.email}</Small>
-            <Small>{user.role=='admin'?'Admin':'Customer'}</Small>
+            <Small>{user.role == "admin" ? "Admin" : "Customer"}</Small>
           </ProfilInfo>
           <ImgCircle src={user.img || defImg} alt="user image" />
         </NavLink>
