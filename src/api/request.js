@@ -42,13 +42,19 @@ export function CreateCategoryRequest(formData) {
 }
 
 // Carts
-export function GetCarts() {
+export function GetCarts(id) {
   return axios
-    .get(`/cart`)
+    .get(`/cart/${id}`)
     .then((res) => res.data)
     .catch((err) => err);
 }
 
+export function CreateCart(data) {
+  return axios
+    .post(`/cart`,data)
+    .then((res) => res.data)
+    .catch((err) => err);
+}
 export function AddCart(id,data) {
   return axios
     .post(`/cart/${id}/add`,data)

@@ -18,7 +18,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import IconHandler from "../../utils/IconHandler";
-import { signUpRequest } from "../../api/request";
+import { CreateCart, signUpRequest } from "../../api/request";
 import { Toast } from "../../utils/toastify";
 
 const SignUp = ({ handleAuth }) => {
@@ -39,6 +39,10 @@ const SignUp = ({ handleAuth }) => {
     try {
       const response = await signUpRequest(user);
       if (response.success) {
+        const createCart = await CreateCart({
+          userId: response.data.payload._id,
+        })
+        localStorage.setItem("cardId", createCart.payload.clientId);
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("user", JSON.stringify(response.data.user));
         Toast.fire({

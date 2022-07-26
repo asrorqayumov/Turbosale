@@ -42,7 +42,7 @@ const NavbarPublic = ({carts,setCarts}) => {
           }
         })}
         <div>
-          <Badge public>{carts.length}</Badge>
+          <Badge public>{carts?.length || 0}</Badge>
           <Button onClick={openModal} public>
             <FontAwesomeIcon icon={faCartShopping} />
           </Button>

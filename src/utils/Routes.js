@@ -15,7 +15,6 @@ export const RoutersPublic = [
     { title:"Cart", path:'/cart', element: Card},
     { title:"Sign-in", path:'/sign-in', element: Signin},
     { title:"Sign-up", path:'/sign-up', element: Signup},
- 
 ]
 
 

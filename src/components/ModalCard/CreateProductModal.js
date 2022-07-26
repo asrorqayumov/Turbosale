@@ -118,7 +118,11 @@ const CreateProductModal = ({ isOpen, setOpen }) => {
             <Label> Category</Label>
             <Select name="categoryId" onChange={inputHandler}>
               {categorys.map((e) => {
-                return <option key={e._id} value={e._id}>{e.name}</option>;
+                return (
+                  <option key={e._id} value={e._id}>
+                    {e.name}
+                  </option>
+                );
               })}
             </Select>
           </InputItem>

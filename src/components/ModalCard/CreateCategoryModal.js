@@ -30,7 +30,6 @@ const CreateCategoryModal = ({ isOpen, setOpen }) => {
     e.preventDefault();
     const { name, value } = e.target;
     setProduct({ ...product, [name]: value });
-    console.log(product);
   };
   const formHandler = async (e) => {
     e.preventDefault();

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -11,7 +11,6 @@ import {
   Title,
   Price,
 } from "./style";
-import { AddCart } from "../../api/request";
 
 const CardModal = ({ setCarts, item, item: { product } }) => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -20,9 +19,7 @@ const CardModal = ({ setCarts, item, item: { product } }) => {
     setTotal(+e?.target?.value);
   };
 
-  const removeHander = ()=>{
-       
-  }
+  const removeHander = () => {};
 
   return (
     <Card>
@@ -52,7 +49,7 @@ const CardModal = ({ setCarts, item, item: { product } }) => {
           <FontAwesomeIcon icon={faPlus} />
         </BtnAmount>
       </WrapperAmount>
-      <Price>{product.price * +total}</Price>
+      <Price>{product.price * total}</Price>
       <ButtonX onClick={removeHander}>
         <FontAwesomeIcon icon={faXmark} />
       </ButtonX>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import {
   FormWrapper,
   Auth,
@@ -16,7 +16,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import IconHandler from "../../utils/IconHandler";
-import { signInRequest } from "../../api/request";
+import { CreateCart, signInRequest } from "../../api/request";
 import { Toast } from "../../utils/toastify";
 
 const SignIn = ({ handleAuth }) => {
@@ -35,7 +35,11 @@ const SignIn = ({ handleAuth }) => {
     e.preventDefault();
     try {
       const response = await signInRequest(user);
-      if (response.data.token) {
+      if (response.data.success) {
+        const createCart = await CreateCart({
+          userId: response.data.payload._id,
+        });
+        localStorage.setItem("cardId", createCart.payload.clientId);
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("user", JSON.stringify(response.data.payload));
         Toast.fire({
@@ -53,7 +57,7 @@ const SignIn = ({ handleAuth }) => {
     } catch (e) {
       Toast.fire({
         icon: "error",
-        title: `${e.response?.data?.msg}`,
+        title: `${e.response.data.msg}`,
       });
     }
   };

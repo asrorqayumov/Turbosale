@@ -50,7 +50,7 @@ const Navbar = ({ setSearchTerm,carts, setCarts }) => {
           <ImgCircle src={user.img || defImg} alt="user image" />
         </NavLink>
         <div>
-          <Badge>{carts.length}</Badge>
+          <Badge>{carts?.length || 0}</Badge>
           <Button onClick={openModal}>
             <FontAwesomeIcon icon={faCartShopping} />
           </Button>

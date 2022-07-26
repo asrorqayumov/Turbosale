@@ -1,12 +1,10 @@
-import React,{useContext} from "react";
+import React from "react";
 import { Details, WrapperDetails } from "./style";
-import ProductDetailsCard from "../../components/productDetailCard"; 
-import {IsPublicContext} from "../../context";
+import ProductDetailsCard from "../../components/productDetailCard";
 
-const ProductDetails = ({setState}) => {
-    const IsPublic =  useContext(IsPublicContext)
+const ProductDetails = ({ setState }) => {
   return (
-    <div className={IsPublic?'section_public':'section'}>
+    <div className={localStorage.getItem('token')?'section':'section_public'}>
       <WrapperDetails>
         <Details>
           <ProductDetailsCard setState={setState} />

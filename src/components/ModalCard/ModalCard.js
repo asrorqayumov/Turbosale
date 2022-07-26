@@ -20,7 +20,6 @@ import { ClearCart } from "../../api/request";
 Modal.setAppElement("#root");
 const ModalCard = ({ carts, setCarts, isOpen, setOpen }) => {
   const user = JSON.parse(localStorage.getItem("user"));
-
   const clearCart = async () => {
     const res = await ClearCart(user._id)
       .then((res) => {
@@ -41,10 +40,10 @@ const ModalCard = ({ carts, setCarts, isOpen, setOpen }) => {
           <FontAwesomeIcon icon={faXmark} />
         </CloseButton>
       </ModalTitle>
-      {carts.length != 0 ? (
+      { carts !== undefined && carts?.length != 0 ? (
         <ModalBody>
           <CardsWrapper>
-            {carts.map((item) => {
+            {carts?.map((item) => {
               return (
                 <CardModal
                   key={item.product._id}
@@ -59,7 +58,7 @@ const ModalCard = ({ carts, setCarts, isOpen, setOpen }) => {
             </ButtonClear>
           </CardsWrapper>
           <button className="btn btn-orange modal-btn">
-            {carts.reduce((pre, curr) => {
+            {carts?.reduce((pre, curr) => {
               return pre + curr.total * curr.product.price;
             }, 0)}{" "}
             Order

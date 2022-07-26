@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   AddButton,
   Button,
@@ -15,16 +15,21 @@ import {
 } from "./style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
-import { GetProduct } from "../../api/request";
-import { defProductImg } from "../../utils";
-import { AddCart } from "../../api/request";
+import { GetProduct, AddCart } from "../../api/request";
+import { cardId, defProductImg } from "../../utils";
 import { Toast } from "./../../utils/toastify";
+import CartContext from "../../context";
 
 const ProductDetailsCard = ({ productId, setOpen }) => {
+  const navigate = useNavigate();
   let params = useParams();
   const user = JSON.parse(localStorage.getItem("user"));
+  const { addToCart } = useContext(CartContext);
+  
+
   const [product, setProduct] = useState({});
   let [total, setTotal] = useState(1);
+  const { img, name, price } = product;
   useEffect(() => {
     GetProduct(params.id || productId)
       .then((res) => setProduct(res))
@@ -33,26 +38,33 @@ const ProductDetailsCard = ({ productId, setOpen }) => {
   const inputHandler = (e) => {
     setTotal(+e.target.value);
   };
+
   const formHandler = async (e) => {
     e.preventDefault();
-    try {
-      const res = await AddCart(user._id, {
-        product: { ...product },
-        total: total,
-        qty: total * product.price,
-      });
-      if ((res.success = "true")) {
-        Toast.fire({
-          icon: "success",
-          title: "Product has added",
+    if (user) {
+      try {
+        const res = await AddCart(cardId, {
+          product: product,
+          qty: total,
+          total: total * price,
         });
-        setOpen(false);
+        if (user) {
+          addToCart(name, price);
+        }
+        if ((res.success = "true")) {
+          Toast.fire({
+            icon: "success",
+            title: "Product has added",
+          });
+          setOpen(false);
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
+    } else {
+      navigate("/sign-in");
     }
   };
-  const { img, name, price } = product;
   return (
     <ModalDialog inside={productId ? "true" : "false"}>
       <ModalContent left>
