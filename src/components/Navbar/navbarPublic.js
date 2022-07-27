@@ -1,18 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import {RoutersPublic} from "../../utils/Routes";
-import { Nav, Img, Navlist, NavItem, Navright, Button, Badge } from "./style";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
-import ModalCard from "../ModalCard/ModalCard";
-const NavbarPublic = ({carts,setCarts}) => {
-  const [modalIsOpen, setIsOpen] = React.useState(false);
-  const openModal = ()=>{
-      setIsOpen(true);
-  }
+import { Nav, Img, Navlist, NavItem, Navright,} from "./style";
+const NavbarPublic = () => {
   return (
     <Nav public >
-       <ModalCard isOpen={modalIsOpen} carts={carts} setCarts={setCarts}  setOpen={setIsOpen} />
       <NavLink to="/">
         <Img src="./brand.png"></Img>
       </NavLink>
@@ -41,12 +33,6 @@ const NavbarPublic = ({carts,setCarts}) => {
             );
           }
         })}
-        <div>
-          <Badge public>{carts?.length || 0}</Badge>
-          <Button onClick={openModal} public>
-            <FontAwesomeIcon icon={faCartShopping} />
-          </Button>
-        </div>
       </Navright>
     </Nav>
   );

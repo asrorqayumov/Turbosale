@@ -16,7 +16,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { GetProduct, AddCart } from "../../api/request";
-import { cardId, defProductImg } from "../../utils";
+import { defProductImg } from "../../utils";
 import { Toast } from "./../../utils/toastify";
 import CartContext from "../../context";
 
@@ -24,11 +24,10 @@ const ProductDetailsCard = ({ productId, setOpen }) => {
   const navigate = useNavigate();
   let params = useParams();
   const user = JSON.parse(localStorage.getItem("user"));
-  const { addToCart } = useContext(CartContext);
-  
-
+  const cardId =localStorage.getItem("cardId");
+  // const { addToCart } = useContext(CartContext);
   const [product, setProduct] = useState({});
-  let [total, setTotal] = useState(1);
+  let [qty, setqty] = useState(1);
   const { img, name, price } = product;
   useEffect(() => {
     GetProduct(params.id || productId)
@@ -36,7 +35,7 @@ const ProductDetailsCard = ({ productId, setOpen }) => {
       .catch((err) => console.log(err));
   }, []);
   const inputHandler = (e) => {
-    setTotal(+e.target.value);
+    setqty(+e.target.value);
   };
 
   const formHandler = async (e) => {
@@ -45,12 +44,12 @@ const ProductDetailsCard = ({ productId, setOpen }) => {
       try {
         const res = await AddCart(cardId, {
           product: product,
-          qty: total,
-          total: total * price,
+          qty: qty,
+          total: qty * price,
         });
-        if (user) {
-          addToCart(name, price);
-        }
+        // if (user) {
+        //   addToCart(name, price);
+        // }
         if ((res.success = "true")) {
           Toast.fire({
             icon: "success",
@@ -79,7 +78,7 @@ const ProductDetailsCard = ({ productId, setOpen }) => {
           </SubTitle>
           <FlexItem>
             <CountWrapper>
-              <Button onClick={() => setTotal((total -= 1))}>
+              <Button onClick={() => setqty((qty -= 1))}>
                 <FontAwesomeIcon icon={faMinus} />
               </Button>
               <Input
@@ -87,14 +86,14 @@ const ProductDetailsCard = ({ productId, setOpen }) => {
                 min={1}
                 onChange={inputHandler}
                 name="amount"
-                value={total}
+                value={qty}
               />
-              <Button onClick={() => setTotal((total += 1))}>
+              <Button onClick={() => setqty((qty += 1))}>
                 <FontAwesomeIcon icon={faPlus} />
               </Button>
             </CountWrapper>
           </FlexItem>
-          <Price>{price * total}</Price>
+          <Price>{price * qty}</Price>
           <AddButton className="card-btn">Add to card</AddButton>
         </form>
       </ModalContent>

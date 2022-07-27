@@ -15,27 +15,13 @@ import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { defProductImg } from "../../utils";
 import AddCardModal from "../ModalCard/AddCardModal";
 import { token } from "../../utils";
-import { AddCart } from "../../api/request";
 
-const Card = ({ path,product, product: { img, name, price, _id } }) => {
+const Card = ({ path, product, product: { img, name, price, _id } }) => {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const openModal = () => {
     setIsOpen(true);
-  };
-  const reqeustHandler = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await AddCart(null, {
-        product: product,
-        total: product.total,
-        qty:product.price,
-      });
-       navigate('/cart')
-    } catch (error) {
-      console.log(error);
-    }
   };
   return (
     <>
@@ -58,7 +44,7 @@ const Card = ({ path,product, product: { img, name, price, _id } }) => {
               </CardIcon>
             </button>
           ) : (
-            <button onClick={reqeustHandler} className="card-btn">
+            <button onClick={() => navigate("/sign-in")} className="card-btn">
               <CardIcon>
                 <FontAwesomeIcon icon={faCartShopping} />
               </CardIcon>

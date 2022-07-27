@@ -8,11 +8,12 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import ProductDetails from "./pages/productdetails/productDetails";
 import { CardProvider } from "./context";
 import { GetCarts, GetProducts } from "./api/request";
-import { cardId } from "./utils";
+
 const App = () => {
   const [state, setState] = useState("");
   const token = localStorage.getItem("token");
   const user = JSON.parse(localStorage.getItem("user"));
+  const cardId =localStorage.getItem("cardId");
   const [carts, setCarts] = useState([]);
   const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
