@@ -11,24 +11,36 @@ import {
   Title,
   Price,
 } from "./style";
+import defProductImg from "../../styles/productdefault.jpg";
+import CartContext from "../../context/cardContext";
+import { RemoveCart } from "../../api/request";
 
-const CardModal = ({ setCarts, item, item: { product } }) => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  let [total, setTotal] = useState(+item.total);
-  const inputHandler = async (e) => {
-    setTotal(+e?.target?.value);
+const CardModal = ({ item, item: { product } }) => {
+  const cardId = localStorage.getItem("cardId");
+  let [qty, setqty] = useState(+item.qty);
+  const { addToCart, items } = useContext(CartContext);
+  const inputHandler = (e) => {
+    setqty(+e?.target?.value);
   };
-
-  const removeHander = () => {};
-
+  const removeHander = () => {
+    const filteredItems = items.filter((item) => {
+      return item.product._id !== product._id;
+    });
+    RemoveCart(cardId, filteredItems)
+      .then((data) => addToCart(data.payload.items))
+      .catch((err) => console.log(err));
+  };
   return (
     <Card>
-      <Img src={product.img} alt="product-img" />
+      <Img
+        src={product.img !== null ? product.img : defProductImg}
+        alt="product-img"
+      />
       <Title> {product.name} </Title>
       <WrapperAmount>
         <BtnAmount
           onClick={() => {
-            setTotal((total -= 1));
+            setqty((qty -= 1));
           }}
         >
           <FontAwesomeIcon icon={faMinus} />
@@ -38,18 +50,18 @@ const CardModal = ({ setCarts, item, item: { product } }) => {
           onChange={inputHandler}
           className="input-amount"
           name="amount"
-          value={+total}
+          value={+qty}
           min="1"
         />
         <BtnAmount
           onClick={() => {
-            setTotal((total += 1));
+            setqty((qty += 1));
           }}
         >
           <FontAwesomeIcon icon={faPlus} />
         </BtnAmount>
       </WrapperAmount>
-      <Price>{product.price * total}</Price>
+      <Price>{product.price * qty}</Price>
       <ButtonX onClick={removeHander}>
         <FontAwesomeIcon icon={faXmark} />
       </ButtonX>

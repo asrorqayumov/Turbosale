@@ -12,11 +12,11 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
-import { defProductImg } from "../../utils";
+import defProductImg  from "../../styles/productdefault.jpg";
 import AddCardModal from "../ModalCard/AddCardModal";
 import { token } from "../../utils";
 
-const Card = ({ path, product, product: { img, name, price, _id } }) => {
+const Card = ({ path, product: { img, name, price, _id } }) => {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
   const [modalIsOpen, setIsOpen] = React.useState(false);

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Modal from "react-modal";
 import CardModal from "../Card/CardModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,18 +16,25 @@ import {
   Text,
 } from "./style";
 import { ClearCart } from "../../api/request";
+import { useContext } from "react";
+import CartContext from "../../context/cardContext";
 
 Modal.setAppElement("#root");
-const ModalCard = ({ carts, setCarts, isOpen, setOpen }) => {
-  const user = JSON.parse(localStorage.getItem("user"));
+const ModalCard = ({ isOpen, setOpen }) => {
+  const navigate = useNavigate();
+  const cardId = localStorage.getItem("cardId");
+  const { items, addToCart } = useContext(CartContext);
   const clearCart = async () => {
-    const res = await ClearCart(user._id)
+    ClearCart(cardId)
       .then((res) => {
-        setCarts(res?.payload?.items);
+        addToCart(res?.payload?.items);
       })
       .catch((err) => console.log(err));
   };
-
+  const navigateHandler = () => {
+    navigate("/products");
+    setOpen(false);
+  };
   return (
     <Modal
       isOpen={isOpen}
@@ -40,17 +47,11 @@ const ModalCard = ({ carts, setCarts, isOpen, setOpen }) => {
           <FontAwesomeIcon icon={faXmark} />
         </CloseButton>
       </ModalTitle>
-      { carts !== undefined && carts?.length != 0 ? (
+      {items !== undefined && items?.length != 0 ? (
         <ModalBody>
           <CardsWrapper>
-            {carts?.map((item) => {
-              return (
-                <CardModal
-                  key={item.product._id}
-                  setCarts={setCarts}
-                  item={item}
-                />
-              );
+            {items?.map((item) => {
+              return <CardModal key={item.product._id} item={item} />;
             })}
             <ButtonClear onClick={clearCart}>
               <FontAwesomeIcon icon={faTrash} style={{ paddingRight: "5px" }} />
@@ -58,8 +59,8 @@ const ModalCard = ({ carts, setCarts, isOpen, setOpen }) => {
             </ButtonClear>
           </CardsWrapper>
           <button className="btn btn-orange modal-btn">
-            {carts?.reduce((pre, curr) => {
-              return pre + curr.total * curr.product.price;
+            {items?.reduce((acc, curr) => {
+              return acc + curr.total;
             }, 0)}{" "}
             Order
           </button>
@@ -74,9 +75,9 @@ const ModalCard = ({ carts, setCarts, isOpen, setOpen }) => {
           <Text>
             There is nothing in your shopping cart. Let's buy something first
           </Text>
-          <Link to="/products" className="btn btn-dark">
+          <button onClick={navigateHandler} className="btn btn-dark">
             Add product
-          </Link>
+          </button>
         </IsEmpty>
       )}
     </Modal>

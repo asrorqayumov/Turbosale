@@ -1,12 +1,15 @@
 import React from "react";
+import { useContext } from "react";
 import Card from "../../components/Card/Card";
+import ProductContext from "../../context/productContext";
 import { CardWrapper } from "../Home/style";
 
-const Products = ({products,searchTerm}) => {
+const Products = ({searchTerm}) => {
+  const {items} = useContext(ProductContext)
   return (
     <div className="section">
       <CardWrapper>
-         {products.filter((val)=>{
+         {items.filter((val)=>{
              if (searchTerm == '') {
                return val
              } else if(val.name.toLowerCase().includes(searchTerm.toLowerCase())){

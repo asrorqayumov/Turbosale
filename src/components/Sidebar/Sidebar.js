@@ -12,8 +12,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import CreateProductModal from "../ModalCard/CreateProductModal";
 
-const Sidebar = ({ user, handleAuth }) => {
+const Sidebar = ({ handleAuth }) => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
+  const user = JSON.parse(localStorage.getItem("user"));
   const openModal = () => {
     setIsOpen(true);
   };

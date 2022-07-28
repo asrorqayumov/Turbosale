@@ -51,13 +51,13 @@ export function GetCarts(id) {
 
 export function CreateCart(data) {
   return axios
-    .post(`/cart`,data)
+    .post(`/cart`, data)
     .then((res) => res.data)
     .catch((err) => err);
 }
-export function AddCart(id,data) {
+export function AddCart(id, data) {
   return axios
-    .post(`/cart/${id}/add`,data)
+    .post(`/cart/${id}/add`, data)
     .then((res) => res.data)
     .catch((err) => err);
 }
@@ -69,9 +69,12 @@ export function ClearCart(id) {
     .catch((err) => err);
 }
 
-export function RemoveCart(id,data) {
+export function RemoveCart(id, data) {
   return axios
-    .delete(`/cart/${id}/remove`,data)
+    .put(`/cart/${id}/remove`, {
+      id:id,
+      items:data
+    })
     .then((res) => res.data)
     .catch((err) => err);
 }

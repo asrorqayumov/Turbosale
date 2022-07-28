@@ -6,17 +6,21 @@ const CartContext = createContext();
 
 export function CardProvider({ children }) {
   const [items, setItems] = useState([]);
+  const [data,setData] = useState('');
   const cardId = localStorage.getItem("cardId");
   useEffect(() => {
     GetCarts(cardId).then((data) => {
-      setItems(data);
+      setItems(data.payload.items);
     });
-  }, []);
-  const addToCart = (name, price) => {
-    setItems((prevState) => [...prevState,name,price ]);
+  }, [data]);
+  const addToCart = (items) => {
+    setItems(items);
+  }; 
+  const changeData = (data) => {
+    setData(data);
   };
   return (
-    <CartContext.Provider value={{ items, addToCart }}>
+    <CartContext.Provider value={{ items, addToCart,changeData }}>
       {children}
     </CartContext.Provider>
   );

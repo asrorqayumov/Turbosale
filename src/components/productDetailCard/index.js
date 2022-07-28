@@ -16,19 +16,18 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { GetProduct, AddCart } from "../../api/request";
-import { defProductImg } from "../../utils";
 import { Toast } from "./../../utils/toastify";
-import CartContext from "../../context";
+import defProductImg from "../../styles/productdefault.jpg";
+import CartContext from "../../context/cardContext";
 
 const ProductDetailsCard = ({ productId, setOpen }) => {
   const navigate = useNavigate();
   let params = useParams();
   const user = JSON.parse(localStorage.getItem("user"));
-  const cardId =localStorage.getItem("cardId");
-  // const { addToCart } = useContext(CartContext);
+  const cardId = localStorage.getItem("cardId");
+  const { changeData } = useContext(CartContext);
   const [product, setProduct] = useState({});
   let [qty, setqty] = useState(1);
-  const { img, name, price } = product;
   useEffect(() => {
     GetProduct(params.id || productId)
       .then((res) => setProduct(res))
@@ -47,15 +46,13 @@ const ProductDetailsCard = ({ productId, setOpen }) => {
           qty: qty,
           total: qty * price,
         });
-        // if (user) {
-        //   addToCart(name, price);
-        // }
+        changeData(name);
         if ((res.success = "true")) {
           Toast.fire({
             icon: "success",
             title: "Product has added",
           });
-          setOpen(false);
+          productId ? setOpen(false) : setOpen(true);
         }
       } catch (error) {
         console.log(error);
@@ -64,10 +61,11 @@ const ProductDetailsCard = ({ productId, setOpen }) => {
       navigate("/sign-in");
     }
   };
+  const { img, name, price } = product;
   return (
     <ModalDialog inside={productId ? "true" : "false"}>
       <ModalContent left>
-        <Img src={img || defProductImg} alt="product-img" />
+        <Img src={img ? img : defProductImg} alt="product-img" />
       </ModalContent>
       <ModalContent>
         <form action="" onSubmit={formHandler}>

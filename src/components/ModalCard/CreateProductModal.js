@@ -23,9 +23,12 @@ import fileUpload from "../../utils/FileUpload";
 import { CreateProductRequest, GetCategorys } from "../../api/request";
 import { Toast } from "./../../utils/toastify";
 import { InputItem, Label } from "../Form/style";
+import { useContext } from "react";
+import ProductContext from "../../context/productContext";
 Modal.setAppElement("#root");
 
 const CreateProductModal = ({ isOpen, setOpen }) => {
+  const {changeData} = useContext(ProductContext)
   const [product, setProduct] = useState({
     name: "",
     price: null,
@@ -60,7 +63,7 @@ const CreateProductModal = ({ isOpen, setOpen }) => {
         icon: "success",
         title: "Product has created",
       });
-      return response;
+      changeData(product.name)
     } catch (error) {
       console.log(error);
     }
