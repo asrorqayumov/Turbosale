@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -22,6 +22,7 @@ const CardModal = ({ item, item: { product } }) => {
   const inputHandler = (e) => {
     setqty(+e?.target?.value);
   };
+
   const removeHander = () => {
     const filteredItems = items.filter((item) => {
       return item.product._id !== product._id;
