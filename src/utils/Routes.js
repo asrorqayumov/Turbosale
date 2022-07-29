@@ -9,6 +9,8 @@ import Contact from "../pages/contact";
 import Categories from "../pages/Categories/categories";
 import Products from '../pages/Products/index'
 import Help from "../pages/help";
+import Profile from "../pages/profile";
+
 
 
 export const RoutersPublic = [
@@ -25,7 +27,7 @@ export  const Routers = [
     { title:"Orders", path:'/orders', element: 'some'},
     { title:"Purchases", path:'/sales', element: 'some'},
     { title:"Help", path:'/help', element: Help},
-    { title:"Profile", path:'/profile', element: 'some'},
+    { title:"Profile", path:'/profile', element: Profile},
     { title:"Checkout", path:'/checkout', element: 'some'},
     { title:"Categories", path:'/categories', element: Categories},
 ]
