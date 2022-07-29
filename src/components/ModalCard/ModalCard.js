@@ -24,6 +24,9 @@ const ModalCard = ({ isOpen, setOpen }) => {
   const navigate = useNavigate();
   const cardId = localStorage.getItem("cardId");
   const { items, addToCart } = useContext(CartContext);
+ 
+   
+  
   const clearCart = async () => {
     ClearCart(cardId)
       .then((res) => {

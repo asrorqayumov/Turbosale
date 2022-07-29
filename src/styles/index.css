@@ -177,12 +177,11 @@ body {
   background-color: white;
 }
 .create_product_modal {
-   width: 50%;
+  width: 50%;
   background-color: #fff;
   padding: 12px;
   border-radius: 4px;
 }
-
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -234,20 +233,24 @@ input::-webkit-inner-spin-button {
   }
 }
 
-.visible{
+.visible {
   visibility: visible !important;
 }
-.mediaCard{
+.mediaCard {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 25px 25px 0px 25px;
 }
-.d-flex{
+.d-flex {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.w-100{
+.w-100 {
   min-height: 60vh;
+}
+.shadow {
+  box-shadow: var(--box-shadow);
+  border-radius: 4px;
 }

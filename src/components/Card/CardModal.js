@@ -23,6 +23,20 @@ const CardModal = ({ item, item: { product } }) => {
     setqty(+e?.target?.value);
   };
 
+  useEffect(() => {
+    const data = items.map((item) => {
+      if (item.product._id == product._id) {
+        item.qty = qty;
+        item.total = item.product.price * qty;
+        return item;
+      }
+      return item;
+    });
+    RemoveCart(cardId, data)
+      .then((data) => addToCart(data.payload.items))
+      .catch((err) => console.log(err));
+  }, [qty]);
+
   const removeHander = () => {
     const filteredItems = items.filter((item) => {
       return item.product._id !== product._id;
