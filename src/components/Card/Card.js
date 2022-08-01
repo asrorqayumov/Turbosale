@@ -14,7 +14,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import defProductImg  from "../../styles/productdefault.jpg";
 import AddCardModal from "../ModalCard/AddCardModal";
-import { token } from "../../utils";
+
 
 const Card = ({ path, product: { img, name, price, _id } }) => {
   const navigate = useNavigate();
@@ -37,7 +37,7 @@ const Card = ({ path, product: { img, name, price, _id } }) => {
           <CardPrice>
             <CardPriceItem>{price}</CardPriceItem>
           </CardPrice>
-          {token ? (
+          {user ? (
             <button className="card-btn" onClick={openModal}>
               <CardIcon>
                 <FontAwesomeIcon icon={faCartShopping} />

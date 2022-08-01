@@ -38,9 +38,9 @@ const SignUp = ({ handleAuth }) => {
     e.preventDefault();
     try {
       const response = await signUpRequest(user);
-      if (response.success) {
+      if (response.data.success) {
         const createCart = await CreateCart({
-          userId: response.data.payload._id,
+          userId: response.data.user._id,
         })
 
         localStorage.setItem("cardId", createCart.payload._id);

@@ -78,3 +78,22 @@ export function RemoveCart(id, data) {
     .then((res) => res.data)
     .catch((err) => err);
 }
+
+// Profile
+
+export function UpdateUserRequest(id, data) {
+  return axios
+    .post(`/users/${id}/edit`, data)
+    .then((res) => res.data)
+    .catch((err) => err);
+}
+
+export function ChangeAuthRequest(id, data) {
+  return axios
+    .post(`/users/${id}/change-auth`, data)
+    .then((res) => res.data)
+    .catch((err) => err);
+}
+
+
+
