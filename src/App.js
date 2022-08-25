@@ -8,6 +8,7 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import ProductDetails from "./pages/productdetails/productDetails";
 import { CardProvider } from "./context/cardContext";
 import { ProductProvider } from "./context/productContext";
+import ProductDetailsPublic from "./pages/productdetails/productDetailsPublic";
 
 const App = () => {
   const [state, setState] = useState("");
@@ -22,7 +23,7 @@ const App = () => {
         <div className="App">
           <NavbarPublic />
           <Routes>
-            <Route path="/product/:id" element={<ProductDetails />} />
+            <Route path="/product/:id" element={<ProductDetailsPublic />} />
             {RoutersPublic.map((item) => {
               return (
                 <Route
@@ -61,7 +62,7 @@ const App = () => {
               })}
               <Route
                 path="/products/:id"
-                element={<ProductDetails setState={setState} />}
+                element={<ProductDetails />}
               />
             </Routes>
           </div>

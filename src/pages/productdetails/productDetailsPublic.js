@@ -1,17 +1,18 @@
 import React from "react";
+import ProductDetailsCardPublic from "../../components/productDetailCard/productDetailCardPublic";
 import { Details, WrapperDetails } from "./style";
-import ProductDetailsCard from "../../components/productDetailCard";
 
-const ProductDetails = () => {
+
+const ProductDetailsPublic = () => {
   return (
     <div className={localStorage.getItem('token')?'section':'section_public'}>
       <WrapperDetails>
         <Details>
-          <ProductDetailsCard />
+          <ProductDetailsCardPublic />
         </Details>
       </WrapperDetails>
     </div>
   );
 };
 
-export default ProductDetails;
+export default ProductDetailsPublic;

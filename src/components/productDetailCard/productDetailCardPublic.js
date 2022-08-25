@@ -15,17 +15,13 @@ import {
 } from "./style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
-import { GetProduct, AddCart } from "../../api/request";
-import { Toast } from "./../../utils/toastify";
+import { GetProduct} from "../../api/request";
 import defProductImg from "../../styles/productdefault.jpg";
-import CartContext from "../../context/cardContext";
 
-const ProductDetailsCard = ({ productId, setOpen, }) => {
+
+const ProductDetailsCardPublic = ({ productId, setOpen, }) => {
   const navigate = useNavigate();
   let params = useParams();
-  const user = JSON.parse(localStorage.getItem("user"));
-  const cardId = localStorage.getItem("cardId");
-  const { changeData } = useContext(CartContext);
   const [product, setProduct] = useState({});
   let [qty, setqty] = useState(1);
   useEffect(() => {
@@ -38,28 +34,8 @@ const ProductDetailsCard = ({ productId, setOpen, }) => {
   };
 
   const formHandler = async (e) => {
-    e.preventDefault();
-    if (user) {
-      try {
-        const res = await AddCart(cardId, {
-          product: product,
-          qty: qty,
-          total: qty * price,
-        });
-        changeData(name); 
-        if ((res.success = "true")) {
-          Toast.fire({
-            icon: "success",
-            title: "Product has added",
-          });
-          productId ? setOpen(false) : setOpen(true);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      navigate("/sign-in");
-    }
+    e.preventDefault(); 
+    navigate("/sign-in");
   };
   const { img, name, price } = product;
   return (
@@ -99,4 +75,4 @@ const ProductDetailsCard = ({ productId, setOpen, }) => {
   );
 };
 
-export default ProductDetailsCard;
+export default ProductDetailsCardPublic;
