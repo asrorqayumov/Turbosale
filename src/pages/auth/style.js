@@ -23,6 +23,15 @@ export const ImgSide = styled.div`
 
 export const Img = styled.img`
   height: 50px;
+  @media (max-width:992px) {
+    height: 45px;
+  }
+  @media (max-width:768px) {
+    height: 37px;
+  }
+  @media (max-width:576px) {
+    height: 32px;
+  }
 `;
 export const Text = styled.h2`
   color: var(--main-dark);

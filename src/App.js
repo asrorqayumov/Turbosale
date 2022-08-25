@@ -9,6 +9,7 @@ import ProductDetails from "./pages/productdetails/productDetails";
 import { CardProvider } from "./context/cardContext";
 import { ProductProvider } from "./context/productContext";
 import ProductDetailsPublic from "./pages/productdetails/productDetailsPublic";
+import PageNotFound from "./pages/pageNotFound";
 
 const App = () => {
   const [state, setState] = useState("");
@@ -17,28 +18,7 @@ const App = () => {
   const handleAuth = (e) => {
     setState(e);
   };
-  if (!token) {
-    return (
-      <ProductProvider>
-        <div className="App">
-          <NavbarPublic />
-          <Routes>
-            <Route path="/product/:id" element={<ProductDetailsPublic />} />
-            {RoutersPublic.map((item) => {
-              return (
-                <Route
-                  key={item.title}
-                  path={item.path}
-                  element={<item.element handleAuth={(e) => handleAuth(e)} />}
-                />
-              );
-            })}
-          </Routes>
-          <Footer />
-        </div>
-      </ProductProvider>
-    );
-  } else {
+  if (token) {
     return (
       <ProductProvider>
         <CardProvider>
@@ -60,13 +40,33 @@ const App = () => {
                   />
                 );
               })}
-              <Route
-                path="/products/:id"
-                element={<ProductDetails />}
-              />
+              <Route path="/products/:id" element={<ProductDetails />} />
+              <Route path="*" element={<PageNotFound   />} />
             </Routes>
           </div>
         </CardProvider>
+      </ProductProvider>
+    );
+  } else {
+    return (
+      <ProductProvider>
+        <div className="App">
+          <NavbarPublic />
+          <Routes>
+            {RoutersPublic.map((item) => {
+              return (
+                <Route
+                key={item.title}
+                path={item.path}
+                element={<item.element handleAuth={(e) => handleAuth(e)} />}
+                />
+                );
+              })}
+              <Route path="/product/:id" element={<ProductDetailsPublic />} />
+              <Route path="*" element={<PageNotFound   />} />
+          </Routes>
+          <Footer />
+        </div>
       </ProductProvider>
     );
   }

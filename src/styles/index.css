@@ -206,7 +206,9 @@ input::-webkit-inner-spin-button {
   padding-top: 15px;
   font-size: 25px;
 }
-@media (max-width: 850px) {
+
+
+@media (max-width: 866px) {
   body {
     font-size: 14px;
   }
@@ -224,6 +226,12 @@ input::-webkit-inner-spin-button {
   }
   .swiperSlide {
     justify-content: center;
+  }
+}
+
+@media (max-width:667px){
+  .nav-link{
+    padding: 7px;
   }
 }
 

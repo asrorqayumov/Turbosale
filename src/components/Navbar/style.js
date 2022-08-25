@@ -13,14 +13,17 @@ export const Nav = styled.nav`
   box-shadow: ${(props) => (props.shadow ? "var(--box-shadow)" : "none")};
   width: 100vw;
   color: #fff;
-  @media (max-width: 760px) {
+  /* @media (max-width: 760px) {
     justify-content: space-around;
-  }
+  } */
 `;
 export const Img = styled.img`
   width: 160px;
   @media (max-width: 760px) {
-    width: 150px;
+    width: 145px;
+  }
+  @media (max-width: 650px) {
+    width: 130px;
   }
 `;
 
@@ -40,6 +43,12 @@ export const Navlist = styled.ul`
 `;
 export const NavItem = styled.li`
   padding: 0 30px;
+  @media (max-width:866px){
+    padding: 0 20px;
+  }
+  @media (max-width:714px){
+    padding: 0 12px;
+  }
 `;
 
 export const Navright = styled.div`
@@ -50,6 +59,11 @@ export const Navright = styled.div`
   justify-content: center;
   & > li {
     padding: 0 10px;
+  }
+  @media (max-width:766px){
+    & > li {
+    padding: 0 0px;
+  }
   }
 `;
 export const Badge = styled.span`
@@ -118,4 +132,4 @@ export const Small = styled.small`
   word-break: keep-all;
   word-wrap: unset;
 `;
-export const Card = styled.div``;
+
